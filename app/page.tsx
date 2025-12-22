@@ -8,7 +8,8 @@ import {
   ArrowRight, Play, Camera, Monitor, 
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
   Palette, PartyPopper, Code2, Users, Trophy, Target, 
-  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone 
+  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone,
+  ChevronDown
 } from "lucide-react";
 
 // --- DATA TESTIMONI ---
@@ -45,6 +46,16 @@ const testimonialsData = [
   }
 ];
 
+// --- DATA MENU LAYANAN (DROPDOWN) ---
+const navServices = [
+  { title: "Event Organizer", desc: "Corporate, Outing & Festival", icon: PartyPopper, slug: "event-organizer" },
+  { title: "Photography", desc: "Wedding, Product & Event", icon: Camera, slug: "professional-photography" },
+  { title: "Cinematic Video", desc: "Ads, Reels & Profile", icon: Film, slug: "cinematic-video" },
+  { title: "Creative Branding", desc: "Logo, Visual & Sosmed", icon: Palette, slug: "creative-branding" },
+  { title: "Software & Web", desc: "Website Bisnis & App", icon: Code2, slug: "software-web" },
+  { title: "Undangan Digital", desc: "Website Invitation", icon: Smartphone, slug: "undangan-digital" },
+];
+
 // --- KOMPONEN NAVBAR ---
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +90,7 @@ const Navbar = () => {
         <Link href="/" className="flex items-center gap-2 group">
           <img 
             src="/images/logo.png" 
-            alt="Logo Jerukmanis" 
+            alt="Logo" 
             className="w-10 h-10 object-contain group-hover:scale-110 transition-transform" 
           />
           <span className={`text-xl font-bold tracking-tight transition-colors ${scrolled ? "text-slate-900" : "text-slate-900"}`}>
@@ -87,15 +98,82 @@ const Navbar = () => {
           </span>
         </Link>
 
-        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+        {/* DESKTOP MENU */}
+        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600 items-center">
           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
             const id = item.toLowerCase().replace(" ", "-");
+            
+            // LOGIKA KHUSUS UNTUK DROPDOWN LAYANAN
+            if (item === "Layanan") {
+              return (
+                <div key={item} className="group relative py-4">
+                  <button 
+                    className="flex items-center gap-1 hover:text-jeruk-600 transition-colors focus:outline-none"
+                    onClick={(e) => { e.preventDefault(); document.getElementById('layanan')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  >
+                    {item}
+                    <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 duration-300" />
+                  </button>
+                  
+                  {/* === MEGA MENU DROPDOWN === */}
+                  <div className="absolute top-full -left-32 w-[800px] bg-white rounded-3xl shadow-2xl border border-slate-100 p-2 opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out grid grid-cols-12 overflow-hidden z-[60]">
+                    
+                    {/* Kolom Kiri: Grid Menu */}
+                    <div className="col-span-8 p-6 grid grid-cols-2 gap-x-4 gap-y-4">
+                      {navServices.map((service, idx) => (
+                        <Link 
+                          key={idx} 
+                          href={`/layanan/${service.slug}`}
+                          className="flex items-start gap-4 p-3 rounded-xl hover:bg-jeruk-50 transition-colors group/item"
+                        >
+                          <div className="p-2.5 bg-white border border-slate-100 rounded-lg shadow-sm text-jeruk-500 group-hover/item:bg-jeruk-500 group-hover/item:text-white transition-all">
+                            <service.icon className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <h5 className="font-bold text-slate-900 text-sm mb-0.5 group-hover/item:text-jeruk-600 transition-colors">
+                              {service.title}
+                            </h5>
+                            <p className="text-xs text-slate-500 leading-snug">
+                              {service.desc}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Kolom Kanan: Banner Promo (Seperti Referensi) */}
+                    <div className="col-span-4 bg-slate-900 relative overflow-hidden rounded-2xl flex flex-col justify-end p-6 group/card">
+                       {/* Hiasan Background */}
+                       <div className="absolute top-0 right-0 w-32 h-32 bg-jeruk-500 rounded-full blur-[40px] opacity-40 translate-x-1/2 -translate-y-1/2"></div>
+                       <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500 rounded-full blur-[40px] opacity-30 -translate-x-1/2 translate-y-1/2"></div>
+                       
+                       <div className="relative z-10">
+                          <span className="bg-jeruk-600 text-white text-[10px] font-bold px-2 py-1 rounded-md mb-3 inline-block">
+                            PROMO BULAN INI
+                          </span>
+                          <h4 className="text-white font-bold text-lg leading-tight mb-2">
+                            Diskon <span className="text-jeruk-400">20%</span> untuk Klien Baru!
+                          </h4>
+                          <p className="text-slate-400 text-xs mb-4 leading-relaxed">
+                            Dapatkan solusi digital & event terbaik khusus bisnis di Yogyakarta.
+                          </p>
+                          <Link href="https://wa.me/6281234567890" className="text-xs font-bold text-white flex items-center gap-2 hover:gap-3 transition-all">
+                            Klaim Sekarang <ArrowRight className="w-3 h-3 text-jeruk-400" />
+                          </Link>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            // MENU BIASA
             return (
               <a 
                 key={item} 
                 href={`#${id}`}
                 onClick={(e) => handleScrollTo(e, id)}
-                className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all cursor-pointer"
+                className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all cursor-pointer py-4"
               >
                 {item}
               </a>
@@ -116,6 +194,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* MOBILE MENU (Tetap Standar agar tidak penuh) */}
       <div className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
          <div className="p-6 flex flex-col gap-4">
            {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
