@@ -1,65 +1,546 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { 
+  ArrowRight, Play, Camera, Monitor, 
+  CheckCircle2, Instagram, Mail, Phone, Menu, X,
+  Palette, Megaphone, Code2, Users, Trophy, Target,
+  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone 
+} from "lucide-react";
+
+// --- DATA TESTIMONI (Dipisah agar mudah di-looping) ---
+const testimonialsData = [
+  {
+    name: "Sari & Raka",
+    role: "Happy Couple",
+    text: "MasyaAllah, foto wedding-nya magis banget! Timnya sabar mengarahkan gaya, hasil videonya juga cinematic parah. Momen sekali seumur hidup jadi abadi.",
+    initial: "SR"
+  },
+  {
+    name: "Budi Santoso",
+    role: "Owner Kopi Senja",
+    text: "Hasil videonya cinematic banget, penjualan kopi kami naik 30% setelah posting reels dari tim Jerukmanis. Recommended untuk UMKM!",
+    initial: "BS"
+  },
+  {
+    name: "Fani Adhitya",
+    role: "Event Organizer",
+    text: "Dokumentasi event kami sangat profesional. Video highlight-nya pas banget vibes-nya, semua peserta suka. Terima kasih Jerukmanis!",
+    initial: "FA"
+  },
+  {
+    name: "Dina Aprilia",
+    role: "CEO StartUp Lokal",
+    text: "Website yang dibuat sangat cepat dan responsif. Timnya juga enak diajak diskusi teknis. Kualitas code-nya rapi dan sesuai ekspektasi bisnis.",
+    initial: "DA"
+  },
+  {
+    name: "Rian Fajar",
+    role: "Marketing Manager",
+    text: "Admin sosmednya fast response dan kontennya selalu fresh. Branding kami jadi jauh lebih konsisten sekarang.",
+    initial: "RF"
+  }
+];
+
+// --- KOMPONEN NAVBAR ---
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-jeruk-100 transition-all">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <img 
+            src="/images/logo.png" 
+            alt="Logo Jerukmanis" 
+            className="w-10 h-10 object-contain group-hover:scale-110 transition-transform" 
+          />
+          <span className="text-xl font-bold tracking-tight text-slate-900">
+            jeruk<span className="text-jeruk-600 font-serif italic">manis</span>.
+          </span>
+        </Link>
+
+        {/* Menu Desktop */}
+        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+          {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => (
+            <Link key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all">
+              {item}
+            </Link>
+          ))}
+        </div>
+
+        {/* CTA Button & Mobile Toggle */}
+        <div className="flex items-center gap-4">
+          <Link 
+            href="https://wa.me/6281234567890" 
+            className="hidden md:inline-flex px-5 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-jeruk-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          >
+            Kontak Kami
+          </Link>
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-slate-700">
+            {isOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl">
+           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => (
+            <Link key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} onClick={() => setIsOpen(false)} className="text-lg font-medium text-slate-800">
+              {item}
+            </Link>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+};
+
+// --- KOMPONEN FOOTER ---
+const Footer = () => (
+  <footer className="bg-slate-950 text-white py-16 border-t-4 border-jeruk-500">
+    <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+      <div className="space-y-4">
+        <h3 className="text-3xl font-bold">jeruk<span className="text-jeruk-500 font-serif italic">manis</span>.</h3>
+        <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
+          Partner kreatif terpercaya di <strong>DI Yogyakarta</strong>. 
+          Melayani kebutuhan branding Bisnis & dokumentasi momen Personal Anda dengan hasil yang manis.
+        </p>
+      </div>
+      <div>
+        <h4 className="font-bold text-lg mb-6 text-jeruk-100">Hubungi Kami</h4>
+        <ul className="space-y-4 text-slate-300 text-sm">
+          <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
+            <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Phone className="w-4 h-4 text-jeruk-500"/></span> 
+            +62 812-xxxx-xxxx
+          </li>
+          <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
+            <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Mail className="w-4 h-4 text-jeruk-500"/></span> 
+            hello@jerukmanis.biz.id
+          </li>
+          {/* PERBAIKAN LINK INSTAGRAM DI SINI */}
+          <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
+            <Link href="https://instagram.com/jerukmanis.creative" target="_blank" className="flex items-center gap-3">
+              <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Instagram className="w-4 h-4 text-jeruk-500"/></span> 
+              @jerukmanis.creative
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div className="md:text-right flex flex-col justify-end">
+        <p className="text-slate-500 text-xs">
+          © {new Date().getFullYear()} Jerukmanis Creative.<br/>All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+);
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen bg-white selection:bg-jeruk-200 selection:text-jeruk-900">
+      <Navbar />
+      
+      {/* CSS untuk Marquee - DIPERBARUI: translate -50% agar looping mulus */}
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); } 
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .pause-on-hover:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
+      {/* 1. HERO SECTION */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        {/* Background Blobs */}
+        <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-jeruk-100 rounded-full blur-[100px] opacity-60 translate-x-1/3 -translate-y-1/4 animate-pulse" />
+        <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-yellow-100 rounded-full blur-[80px] opacity-50 -translate-x-1/3 translate-y-1/4" />
+        
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            
+            <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
+              Solusi <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Bisnis</span>,<br />
+              & <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Momen</span> <span className="font-serif italic font-light text-slate-800 relative z-10 before:absolute before:bottom-2 before:left-0 before:w-full before:h-3 before:bg-jeruk-200/50 before:-z-10">Manis.</span>
+            </h1>
+            
+            <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+              Partner kreatif untuk <strong>skala Bisnis</strong> maupun <strong>Perorangan</strong>. Mulai dari strategi branding UMKM, website korporat, hingga dokumentasi pernikahan yang estetik di Yogyakarta.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="https://wa.me/6281234567890" className="flex items-center justify-center gap-2 px-8 py-4 bg-jeruk-600 text-white rounded-full font-bold text-lg hover:bg-jeruk-700 hover:scale-105 transition-all shadow-xl shadow-jeruk-500/30">
+                Konsultasi Sekarang
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <button className="flex items-center justify-center gap-3 px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-lg hover:border-jeruk-300 hover:bg-jeruk-50 transition-all">
+                <Play className="w-5 h-5 fill-slate-700" />
+                Lihat Showreel
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Hero Visual */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative hidden lg:block"
+          >
+             <div className="relative z-10 grid grid-cols-2 gap-5">
+                <div className="space-y-5 translate-y-12">
+                   <div className="bg-slate-900 p-6 rounded-[2rem] text-white shadow-xl hover:-translate-y-2 transition-transform duration-500">
+                      <Camera className="w-10 h-10 text-jeruk-400 mb-4" />
+                      <h3 className="font-bold text-xl">Momen</h3>
+                      <p className="text-slate-400 text-sm">Wedding & Personal</p>
+                   </div>
+                   <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&q=80&w=600" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Wedding" />
+                </div>
+                <div className="space-y-5">
+                   <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=600" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Office" />
+                   <div className="bg-jeruk-500 p-6 rounded-[2rem] text-white shadow-xl hover:-translate-y-2 transition-transform duration-500">
+                      <Monitor className="w-10 h-10 text-white mb-4" />
+                      <h3 className="font-bold text-xl">Bisnis</h3>
+                      <p className="text-white/80 text-sm">Branding & Website</p>
+                   </div>
+                </div>
+             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 2. TENTANG KAMI SECTION */}
+      <section id="tentang" className="py-24 bg-white relative overflow-hidden">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-jeruk-50 rounded-full blur-3xl -z-10"></div>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Foto Tim */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-jeruk-200 rounded-[2.5rem] rotate-3 transform translate-x-2 translate-y-2 -z-10"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" 
+                alt="Tim Jerukmanis" 
+                className="rounded-[2.5rem] w-full object-cover shadow-xl grayscale hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-[2rem] shadow-xl border border-jeruk-100 hidden md:block">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-jeruk-500 rounded-full flex items-center justify-center text-white">
+                    <Trophy className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-slate-900">3+</p>
+                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Tahun Pengalaman</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Teks Cerita */}
+            <div>
+              <span className="text-jeruk-600 font-bold tracking-wider text-sm uppercase mb-2 block">Tentang Kami</span>
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+                Satu Pintu untuk <br/>
+                <span className="font-serif italic text-jeruk-600">Semua Kebutuhan.</span>
+              </h2>
+              <p className="text-slate-600 text-lg leading-relaxed mb-6">
+                Kami percaya kreativitas tidak terbatas pada satu segmen. Jerukmanis hadir sebagai partner fleksibel: profesional saat menangani <strong>target perusahaan</strong>, namun tetap hangat dan penuh rasa saat mengabadikan <strong>momen personal</strong> Anda.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                Kami adalah kolektif videografer, fotografer, desainer, dan developer di Yogyakarta. Apapun tujuannya—meningkatkan omzet bisnis atau mengenang hari pernikahan—kami punya resep visual yang pas.
+              </p>
+              <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
+                <div className="flex items-start gap-3">
+                   <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Target className="w-5 h-5" /></div>
+                   <div>
+                      <h4 className="font-bold text-2xl text-slate-900">50+</h4>
+                      <p className="text-sm text-slate-500">Klien Bisnis</p>
+                   </div>
+                </div>
+                <div className="flex items-start gap-3">
+                   <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Heart className="w-5 h-5" /></div>
+                   <div>
+                      <h4 className="font-bold text-2xl text-slate-900">20+</h4>
+                      <p className="text-sm text-slate-500">Klien Wedding</p>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. LAYANAN SECTION (MENU SPESIAL - UPDATED) */}
+      <section id="layanan" className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Menu <span className="font-serif italic text-jeruk-600">Layanan</span></h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Pilih menu sesuai kebutuhan Anda. Kami siap melayani entitas Bisnis maupun Perorangan.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+             {/* Card 1: Professional Photography */}
+            <ServiceCard 
+              icon={<Camera className="w-7 h-7"/>}
+              title="Professional Photography"
+              items={["Wedding & Pre-wedding", "Event Documentation", "Product Catalog", "Personal / Graduation Photoshoot"]}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+             {/* Card 2: Videografi */}
+             <ServiceCard 
+              icon={<Film className="w-7 h-7"/>}
+              title="Cinematic Video"
+              items={["Wedding Cinematic Clip", "Company Profile Video", "Commercial Ads & Reels", "Event Highlight Video"]}
+            />
+            {/* Card 3: Undangan Digital (NEW) */}
+             <ServiceCard 
+              icon={<Mail className="w-7 h-7"/>}
+              title="Undangan Digital"
+              items={["Website Invitation (Wedding/Event)", "Video Invitation", "Digital RSVP Management"]}
+            />
+             {/* Card 4: Creative Branding */}
+             <ServiceCard 
+              icon={<Palette className="w-7 h-7"/>}
+              title="Creative Branding"
+              items={["Brand Identity (Logo)", "Social Media Design", "Content Creation", "Creative Strategy"]}
+            />
+            {/* Card 5: Event Organizer (UPDATED HERE) */}
+            <ServiceCard 
+              icon={<Megaphone className="w-7 h-7"/>}
+              title="Event Organizer"
+              items={["Sweet 17 Party", "Opening Business", "Live Streaming Services", "Event Management & Concept"]}
+            />
+             {/* Card 6: Software Dev */}
+            <ServiceCard 
+              icon={<Code2 className="w-7 h-7"/>}
+              title="Software & Web"
+              items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio Pribadi", "Sistem Kasir"]}
+            />
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* 4. PORTOFOLIO SECTION (HASIL PANEN) */}
+      <section id="portofolio" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2">Hasil <span className="font-serif italic text-jeruk-600">Panen</span></h2>
+                <p className="text-slate-500">Koleksi karya manis untuk klien bisnis dan perorangan.</p>
+              </div>
+              <button className="hidden md:flex items-center gap-2 text-jeruk-600 font-semibold hover:gap-4 transition-all group">
+                Lihat Semua <ArrowRight className="w-4 h-4 group-hover:text-jeruk-500"/>
+              </button>
+           </div>
+           
+           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Portfolio Item 1 - Bisnis */}
+              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg">
+                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Web Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Untuk Bisnis</span>
+                    <h3 className="text-white text-xl font-bold">Company Profile UMKM</h3>
+                  </div>
+              </div>
+              {/* Portfolio Item 2 - Personal/Wedding */}
+              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg">
+                  <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Wedding Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Untuk Perorangan</span>
+                    <h3 className="text-white text-xl font-bold">Cinematic Wedding Clip</h3>
+                  </div>
+              </div>
+               {/* Portfolio Item 3 - Branding */}
+               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg">
+                  <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800" alt="Design Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Branding</span>
+                    <h3 className="text-white text-xl font-bold">Identitas Visual Kreatif</h3>
+                  </div>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* 5. MENGAPA PILIH JERUKMANIS? */}
+      <section id="cara-kerja" className="py-24 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Mengapa pilih <span className="font-serif italic text-jeruk-600">Jerukmanis?</span></h2>
+              <div className="space-y-8">
+                <FeatureItem 
+                    title="Bisnis & Personal" 
+                    desc="Kami satu-satunya partner yang fleksibel: Bisa profesional mengurus sistem bisnis Anda, sekaligus estetik mengabadikan momen pernikahan Anda." 
+                />
+                <FeatureItem 
+                    title="Perencanaan & Eksekusi Matang" 
+                    desc="Kami meracik strategi dan tujuan yang tepat, serta mengeksekusinya di media sosial agar tujuan Anda tercapai dengan manis dan terarah." 
+                />
+                <FeatureItem 
+                    title="Hemat Waktu & Biaya" 
+                    desc="Hemat anggaran tanpa perlu rekrut tim sendiri. Anda bisa fokus pada hal lain, biar urusan visual dan digital kami yang kupas tuntas." 
+                />
+              </div>
+            </div>
+            
+            <div className="relative">
+               <div className="aspect-square bg-gradient-to-tr from-jeruk-400 to-orange-300 rounded-full blur-3xl opacity-20 absolute inset-0 animate-pulse"></div>
+               <div className="relative bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-jeruk-100/50">
+                  <h3 className="font-bold text-xl mb-8 border-b pb-4 border-slate-100">Alur Kerja Kami</h3>
+                  <div className="space-y-10 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
+                    <Step number="1" title="Diskusi" desc="Ceritakan kebutuhan bisnis atau rencana acara spesial Anda." />
+                    <Step number="2" title="Konsep" desc="Kami meracik strategi dan moodboard visual yang tepat." />
+                    <Step number="3" title="Eksekusi" desc="Proses produksi, editing, dan delivery file final yang manis." />
+                  </div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. TESTIMONI PENIKMAT (INFINITE MARQUEE - SEAMLESS LOOP) */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Testimoni <span className="font-serif italic text-jeruk-600">Penikmat</span></h2>
+            <p className="text-slate-500 mt-4">Apa kata klien tentang kami.</p>
+        </div>
+
+        {/* Marquee Container */}
+        <div className="relative w-full overflow-hidden">
+          {/* Wrapper with mask for fade effect at edges */}
+          <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-white to-transparent z-10 hidden md:block" />
+          <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10 hidden md:block" />
+
+          {/* Scrolling Content - Duplicate content for seamless loop */}
+          {/* w-max penting agar width mengikuti konten */}
+          <div className="flex w-max animate-marquee pause-on-hover">
+            {/* Set Pertama */}
+            <div className="flex gap-6 px-3">
+              {testimonialsData.map((item, index) => (
+                 <TestimonialCard key={`orig-${index}`} {...item} />
+              ))}
+            </div>
+            {/* Set Kedua (Clone) */}
+            <div className="flex gap-6 px-3">
+              {testimonialsData.map((item, index) => (
+                 <TestimonialCard key={`clone-${index}`} {...item} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. CTA SECTION */}
+      <section className="py-24">
+         <div className="max-w-5xl mx-auto px-6">
+            <div className="bg-slate-900 rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden group">
+               <div className="absolute top-0 right-0 w-80 h-80 bg-jeruk-500 rounded-full blur-[100px] opacity-30 translate-x-1/2 -translate-y-1/2 group-hover:opacity-40 transition-opacity"></div>
+               <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600 rounded-full blur-[80px] opacity-20 -translate-x-1/2 translate-y-1/2"></div>
+               
+               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 relative z-10 leading-tight">
+                 Siap membuat konten yang <br/> <span className="text-jeruk-500 font-serif italic">Lebih Manis?</span>
+               </h2>
+               <p className="text-slate-400 mb-10 text-lg max-w-xl mx-auto relative z-10">
+                 Yuk, sampaikan ide kalian pada kami sekarang.
+               </p>
+               <Link 
+                href="https://wa.me/6281234567890"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-jeruk-600 text-white rounded-full font-bold text-lg hover:bg-jeruk-500 hover:scale-105 transition-all shadow-lg shadow-jeruk-500/25 relative z-10"
+               >
+                  <Phone className="w-5 h-5" />
+                  Hubungi via WhatsApp
+               </Link>
+            </div>
+         </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }
+
+// --- SUB-KOMPONEN KECIL ---
+
+const ServiceCard = ({ icon, title, items }: { icon: any, title: string, items: string[] }) => (
+  <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col">
+    <div className="w-14 h-14 bg-jeruk-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-jeruk-500 transition-colors duration-300 flex-shrink-0">
+      <div className="text-jeruk-600 group-hover:text-white transition-colors duration-300">
+        {icon}
+      </div>
+    </div>
+    
+    <h3 className="font-bold text-xl mb-4 text-slate-900">{title}</h3>
+    
+    <ul className="space-y-3 flex-grow">
+      {items.map((item, index) => (
+        <li key={index} className="text-slate-600 text-sm flex items-start gap-3 leading-snug">
+          <span className="h-1.5 w-1.5 rounded-full bg-jeruk-500 mt-1.5 flex-shrink-0"></span>
+          {item}
+        </li>
+      ))}
+    </ul>
+
+    <div className="mt-8 pt-4 border-t border-slate-100">
+        <button className="text-jeruk-600 font-bold text-sm flex items-center gap-2 group/btn hover:gap-4 transition-all">
+            Lihat Detail <ArrowRight className="w-4 h-4"/>
+        </button>
+    </div>
+  </div>
+);
+
+const FeatureItem = ({ title, desc }: { title: string, desc: string }) => (
+  <div className="flex gap-4">
+    <div className="mt-1 flex-shrink-0">
+      <CheckCircle2 className="w-6 h-6 text-jeruk-500" />
+    </div>
+    <div>
+      <h4 className="font-bold text-lg text-slate-900">{title}</h4>
+      <p className="text-slate-600 text-sm leading-relaxed">{desc}</p>
+    </div>
+  </div>
+);
+
+const Step = ({ number, title, desc }: { number: string, title: string, desc: string }) => (
+  <div className="flex gap-5 relative bg-white">
+    <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold flex-shrink-0 z-10 border-[6px] border-white shadow-sm">
+      {number}
+    </div>
+    <div className="pt-1">
+      <h4 className="font-bold text-lg text-slate-900 mb-1">{title}</h4>
+      <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+    </div>
+  </div>
+);
+
+const TestimonialCard = ({ name, role, text, initial }: { name: string, role: string, text: string, initial: string }) => (
+    <div className="shrink-0 w-[85vw] md:w-[400px] bg-white p-8 rounded-3xl shadow-sm border border-jeruk-100 text-left relative group hover:shadow-lg transition-all">
+        <Quote className="absolute top-6 right-6 text-jeruk-100 w-10 h-10 rotate-180 group-hover:text-jeruk-200 transition-colors"/>
+        <div className="flex gap-1 mb-4">
+            {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400"/>)}
+        </div>
+        <p className="text-slate-600 italic mb-6 leading-relaxed text-sm md:text-base">
+            "{text}"
+        </p>
+        <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center font-bold text-slate-600 group-hover:bg-jeruk-100 group-hover:text-jeruk-700 transition-colors">
+                {initial}
+            </div>
+            <div>
+                <h5 className="font-bold text-slate-900 text-sm">{name}</h5>
+                <p className="text-xs text-slate-500">{role}</p>
+            </div>
+        </div>
+    </div>
+);
