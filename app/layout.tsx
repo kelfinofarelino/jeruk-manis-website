@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google"; // Atau font lain yang Anda pakai
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jerukmanis | Creative Agency",
-  description: "Jasa videografi, fotografi, desain grafis, dan web development untuk UMKM. Ide Segar, Hasil Manis.",
+  title: "Jerukmanis Creative",
+  description: "Creative Agency & Event Organizer Jogja",
+  icons: {
+    icon: '/brand-icon.png',
+    shortcut: '/brand-icon.png',
+    apple: '/brand-icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className={`${jakarta.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden`}>
-        {children}
-      </body>
+      <head>
+        <link rel="icon" href="/brand-icon.png" sizes="any" />
+      </head>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

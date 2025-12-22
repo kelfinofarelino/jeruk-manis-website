@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   ArrowRight, Play, Camera, Monitor, 
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
-  Palette, Megaphone, Code2, Users, Trophy, Target,
+  Palette, PartyPopper, Code2, Users, Trophy, Target, 
   Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone 
 } from "lucide-react";
 
-// --- DATA TESTIMONI (Dipisah agar mudah di-looping) ---
+// --- DATA TESTIMONI ---
 const testimonialsData = [
   {
     name: "Sari & Raka",
@@ -19,16 +19,16 @@ const testimonialsData = [
     initial: "SR"
   },
   {
-    name: "Budi Santoso",
-    role: "Owner Kopi Senja",
-    text: "Hasil videonya cinematic banget, penjualan kopi kami naik 30% setelah posting reels dari tim Jerukmanis. Recommended untuk UMKM!",
-    initial: "BS"
+    name: "PT Maju Bersama",
+    role: "Corporate Client",
+    text: "Event gathering kantor kami berjalan super lancar berkat tim Jerukmanis. Konsep acaranya seru, rundown rapi, dan dokumentasinya juara!",
+    initial: "MB"
   },
   {
-    name: "Fani Adhitya",
-    role: "Event Organizer",
-    text: "Dokumentasi event kami sangat profesional. Video highlight-nya pas banget vibes-nya, semua peserta suka. Terima kasih Jerukmanis!",
-    initial: "FA"
+    name: "Budi Santoso",
+    role: "Owner Kopi Senja",
+    text: "Hasil videonya cinematic banget, penjualan kopi kami naik setelah posting reels. Branding visual yang dibuat bener-bener nangkep vibes kedai kami.",
+    initial: "BS"
   },
   {
     name: "Dina Aprilia",
@@ -37,20 +37,36 @@ const testimonialsData = [
     initial: "DA"
   },
   {
-    name: "Rian Fajar",
-    role: "Marketing Manager",
-    text: "Admin sosmednya fast response dan kontennya selalu fresh. Branding kami jadi jauh lebih konsisten sekarang.",
-    initial: "RF"
+    name: "Fani Adhitya",
+    role: "Festival Director",
+    text: "Kerja sama untuk dokumentasi konser musik sangat memuaskan. Tim gercep menangkap momen-momen emas di panggung.",
+    initial: "FA"
   }
 ];
 
 // --- KOMPONEN NAVBAR ---
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Efek Scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-jeruk-100 transition-all">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <nav 
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled 
+          ? "bg-white/90 backdrop-blur-md shadow-sm py-3 border-b border-slate-100" 
+          : "bg-transparent py-6"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <img 
@@ -58,7 +74,7 @@ const Navbar = () => {
             alt="Logo Jerukmanis" 
             className="w-10 h-10 object-contain group-hover:scale-110 transition-transform" 
           />
-          <span className="text-xl font-bold tracking-tight text-slate-900">
+          <span className={`text-xl font-bold tracking-tight transition-colors ${scrolled ? "text-slate-900" : "text-slate-900"}`}>
             jeruk<span className="text-jeruk-600 font-serif italic">manis</span>.
           </span>
         </Link>
@@ -66,7 +82,11 @@ const Navbar = () => {
         {/* Menu Desktop */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => (
-            <Link key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all">
+            <Link 
+              key={item} 
+              href={`#${item.toLowerCase().replace(" ", "-")}`} 
+              className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all"
+            >
               {item}
             </Link>
           ))}
@@ -76,9 +96,9 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <Link 
             href="https://wa.me/6281234567890" 
-            className="hidden md:inline-flex px-5 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-jeruk-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            className="hidden md:inline-flex px-6 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-jeruk-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
           >
-            Kontak Kami
+            Hubungi Kami
           </Link>
           <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-slate-700">
             {isOpen ? <X /> : <Menu />}
@@ -87,15 +107,15 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col gap-4 shadow-xl">
+      <div className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+         <div className="p-6 flex flex-col gap-4">
            {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => (
-            <Link key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} onClick={() => setIsOpen(false)} className="text-lg font-medium text-slate-800">
+            <Link key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} onClick={() => setIsOpen(false)} className="text-lg font-medium text-slate-800 hover:text-jeruk-600">
               {item}
             </Link>
           ))}
-        </div>
-      )}
+         </div>
+      </div>
     </nav>
   );
 };
@@ -108,7 +128,7 @@ const Footer = () => (
         <h3 className="text-3xl font-bold">jeruk<span className="text-jeruk-500 font-serif italic">manis</span>.</h3>
         <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
           Partner kreatif terpercaya di <strong>DI Yogyakarta</strong>. 
-          Melayani kebutuhan branding Bisnis & dokumentasi momen Personal Anda dengan hasil yang manis.
+          Spesialis Event Organizer, Dokumentasi Visual, dan Pengembangan Web untuk Bisnis & Momen Personal Anda.
         </p>
       </div>
       <div>
@@ -120,9 +140,8 @@ const Footer = () => (
           </li>
           <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
             <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Mail className="w-4 h-4 text-jeruk-500"/></span> 
-            hello@jerukmanis.biz.id
+            hello@jerukmanis.web.id
           </li>
-          {/* PERBAIKAN LINK INSTAGRAM DI SINI */}
           <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
             <Link href="https://instagram.com/jerukmanis.creative" target="_blank" className="flex items-center gap-3">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Instagram className="w-4 h-4 text-jeruk-500"/></span> 
@@ -142,10 +161,10 @@ const Footer = () => (
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white selection:bg-jeruk-200 selection:text-jeruk-900">
+    <main className="min-h-screen bg-white selection:bg-jeruk-200 selection:text-jeruk-900 font-sans">
       <Navbar />
       
-      {/* CSS untuk Marquee - DIPERBARUI: translate -50% agar looping mulus */}
+      {/* CSS untuk Marquee */}
       <style jsx global>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -170,20 +189,20 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            
+          > 
+            {/* UPDATED H1 SECTION: "Event" disamakan gayanya dengan "Kreatif" */}
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
-              Solusi <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Bisnis</span>,<br />
-              & <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Momen</span> <span className="font-serif italic font-light text-slate-800 relative z-10 before:absolute before:bottom-2 before:left-0 before:w-full before:h-3 before:bg-jeruk-200/50 before:-z-10">Manis.</span>
+              Solusi <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Kreatif</span>,<br />
+              & <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Event</span> <span className="font-serif italic font-light text-slate-800 relative z-10 before:absolute before:bottom-2 before:left-0 before:w-full before:h-3 before:bg-jeruk-200/50 before:-z-10">Manis.</span>
             </h1>
             
             <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
-              Partner kreatif untuk <strong>skala Bisnis</strong> maupun <strong>Perorangan</strong>. Mulai dari strategi branding UMKM, website korporat, hingga dokumentasi pernikahan yang estetik di Yogyakarta.
+              Partner kreatif untuk <strong>skala Bisnis</strong> maupun <strong>Perorangan</strong>. Mulai dari manajemen Event (EO) profesional, dokumentasi visual yang estetik, hingga pembuatan website di Yogyakarta.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="https://wa.me/6281234567890" className="flex items-center justify-center gap-2 px-8 py-4 bg-jeruk-600 text-white rounded-full font-bold text-lg hover:bg-jeruk-700 hover:scale-105 transition-all shadow-xl shadow-jeruk-500/30">
-                Konsultasi Sekarang
+                Konsultasi Gratis
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <button className="flex items-center justify-center gap-3 px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-lg hover:border-jeruk-300 hover:bg-jeruk-50 transition-all">
@@ -204,17 +223,17 @@ export default function Home() {
                 <div className="space-y-5 translate-y-12">
                    <div className="bg-slate-900 p-6 rounded-[2rem] text-white shadow-xl hover:-translate-y-2 transition-transform duration-500">
                       <Camera className="w-10 h-10 text-jeruk-400 mb-4" />
-                      <h3 className="font-bold text-xl">Momen</h3>
-                      <p className="text-slate-400 text-sm">Wedding & Personal</p>
+                      <h3 className="font-bold text-xl">Visual</h3>
+                      <p className="text-slate-400 text-sm">Dokumentasi & Event</p>
                    </div>
-                   <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&q=80&w=600" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Wedding" />
+                   <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Wedding" />
                 </div>
                 <div className="space-y-5">
-                   <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=600" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Office" />
+                   <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=600" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Event" />
                    <div className="bg-jeruk-500 p-6 rounded-[2rem] text-white shadow-xl hover:-translate-y-2 transition-transform duration-500">
-                      <Monitor className="w-10 h-10 text-white mb-4" />
-                      <h3 className="font-bold text-xl">Bisnis</h3>
-                      <p className="text-white/80 text-sm">Branding & Website</p>
+                      <PartyPopper className="w-10 h-10 text-white mb-4" />
+                      <h3 className="font-bold text-xl">Event</h3>
+                      <p className="text-white/80 text-sm">Organizer & Concept</p>
                    </div>
                 </div>
              </div>
@@ -252,28 +271,28 @@ export default function Home() {
             <div>
               <span className="text-jeruk-600 font-bold tracking-wider text-sm uppercase mb-2 block">Tentang Kami</span>
               <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                Satu Pintu untuk <br/>
-                <span className="font-serif italic text-jeruk-600">Semua Kebutuhan.</span>
+                Meracik Pengalaman <br/>
+                <span className="font-serif italic text-jeruk-600">Yang Berkesan.</span>
               </h2>
               <p className="text-slate-600 text-lg leading-relaxed mb-6">
-                Kami percaya kreativitas tidak terbatas pada satu segmen. Jerukmanis hadir sebagai partner fleksibel: profesional saat menangani <strong>target perusahaan</strong>, namun tetap hangat dan penuh rasa saat mengabadikan <strong>momen personal</strong> Anda.
+                Kami percaya momen terbaik tidak terjadi begitu saja, tapi diciptakan. Jerukmanis hadir sebagai partner fleksibel: andal merancang <strong>Event Perusahaan & Publik</strong>, namun tetap hangat dan penuh rasa saat mengabadikan <strong>momen personal</strong> Anda.
               </p>
               <p className="text-slate-600 leading-relaxed mb-8">
-                Kami adalah kolektif videografer, fotografer, desainer, dan developer di Yogyakarta. Apapun tujuannya—meningkatkan omzet bisnis atau mengenang hari pernikahan—kami punya resep visual yang pas.
+                Kami adalah kolektif Event Planner, Fotografer, dan Developer di Yogyakarta. Apapun tujuannya—meluncurkan produk baru atau merayakan hari pernikahan—kami punya resep yang pas.
               </p>
               <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
                 <div className="flex items-start gap-3">
                    <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Target className="w-5 h-5" /></div>
                    <div>
                       <h4 className="font-bold text-2xl text-slate-900">50+</h4>
-                      <p className="text-sm text-slate-500">Klien Bisnis</p>
+                      <p className="text-sm text-slate-500">Projek</p>
                    </div>
                 </div>
                 <div className="flex items-start gap-3">
                    <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Heart className="w-5 h-5" /></div>
                    <div>
                       <h4 className="font-bold text-2xl text-slate-900">20+</h4>
-                      <p className="text-sm text-slate-500">Klien Wedding</p>
+                      <p className="text-sm text-slate-500">Klien Happy</p>
                    </div>
                 </div>
               </div>
@@ -282,62 +301,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. LAYANAN SECTION (MENU SPESIAL - UPDATED) */}
+      {/* 3. LAYANAN SECTION */}
       <section id="layanan" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Menu <span className="font-serif italic text-jeruk-600">Layanan</span></h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Pilih menu sesuai kebutuhan Anda. Kami siap melayani entitas Bisnis maupun Perorangan.</p>
+            <p className="text-slate-600 max-w-2xl mx-auto">Solusi lengkap untuk kebutuhan Acara, Visual, dan Digital Anda.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-             {/* Card 1: Professional Photography */}
-            <ServiceCard 
-              icon={<Camera className="w-7 h-7"/>}
-              title="Professional Photography"
-              items={["Wedding & Pre-wedding", "Event Documentation", "Product Catalog", "Personal / Graduation Photoshoot"]}
-            />
-             {/* Card 2: Videografi */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+             
+             {/* Card 1: Event Organizer */}
              <ServiceCard 
-              icon={<Film className="w-7 h-7"/>}
-              title="Cinematic Video"
-              items={["Wedding Cinematic Clip", "Company Profile Video", "Commercial Ads & Reels", "Event Highlight Video"]}
-            />
-            {/* Card 3: Undangan Digital (NEW) */}
-             <ServiceCard 
-              icon={<Mail className="w-7 h-7"/>}
-              title="Undangan Digital"
-              items={["Website Invitation (Wedding/Event)", "Video Invitation", "Digital RSVP Management"]}
-            />
-             {/* Card 4: Creative Branding */}
-             <ServiceCard 
-              icon={<Palette className="w-7 h-7"/>}
-              title="Creative Branding"
-              items={["Brand Identity (Logo)", "Social Media Design", "Content Creation", "Creative Strategy"]}
-            />
-            {/* Card 5: Event Organizer (UPDATED HERE) */}
-            <ServiceCard 
-              icon={<Megaphone className="w-7 h-7"/>}
+              icon={<PartyPopper className="w-8 h-8"/>}
               title="Event Organizer"
-              items={["Sweet 17 Party", "Opening Business", "Live Streaming Services", "Event Management & Concept"]}
+              items={["Corporate Gathering & Outing", "Product Launching & Activation", "Music Concert & Festival", "Professional Live Streaming"]}
             />
+
+             {/* Card 2: Professional Photography */}
+            <ServiceCard 
+              icon={<Camera className="w-8 h-8"/>}
+              title="Professional Photography"
+              items={["Wedding & Pre-wedding", "Event Documentation", "Product Catalog", "Personal / Graduation"]}
+            />
+             
+             {/* Card 3: Videografi */}
+             <ServiceCard 
+              icon={<Film className="w-8 h-8"/>}
+              title="Cinematic Video"
+              items={["Wedding Cinematic Clip", "Company Profile Video", "Commercial Ads & Reels", "After Movie Event"]}
+            />
+            
+            {/* Card 4: Creative Branding */}
+             <ServiceCard 
+              icon={<Palette className="w-8 h-8"/>}
+              title="Creative Branding"
+              items={["Brand Identity (Logo)", "Social Media Design", "Content Creation", "Visual Strategy"]}
+            />
+
+            {/* Card 5: Undangan Digital */}
+             <ServiceCard 
+              icon={<Smartphone className="w-8 h-8"/>}
+              title="Undangan Digital"
+              items={["Website Invitation (Wedding/Event)", "Video Invitation", "Digital RSVP System"]}
+            />
+
              {/* Card 6: Software Dev */}
             <ServiceCard 
-              icon={<Code2 className="w-7 h-7"/>}
+              icon={<Code2 className="w-8 h-8"/>}
               title="Software & Web"
-              items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio Pribadi", "Sistem Kasir"]}
+              items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio", "Sistem Kasir"]}
             />
           </div>
         </div>
       </section>
 
-      {/* 4. PORTOFOLIO SECTION (HASIL PANEN) */}
+      {/* 4. PORTOFOLIO SECTION */}
       <section id="portofolio" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
               <div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2">Hasil <span className="font-serif italic text-jeruk-600">Panen</span></h2>
-                <p className="text-slate-500">Koleksi karya manis untuk klien bisnis dan perorangan.</p>
+                <p className="text-slate-500">Jejak karya manis dari berbagai event dan projek kami.</p>
               </div>
               <button className="hidden md:flex items-center gap-2 text-jeruk-600 font-semibold hover:gap-4 transition-all group">
                 Lihat Semua <ArrowRight className="w-4 h-4 group-hover:text-jeruk-500"/>
@@ -345,28 +370,28 @@ export default function Home() {
            </div>
            
            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Portfolio Item 1 - Bisnis */}
-              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Web Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+              {/* Portfolio Item 1 - Event */}
+              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
+                  <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" alt="Event Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Untuk Bisnis</span>
-                    <h3 className="text-white text-xl font-bold">Company Profile UMKM</h3>
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Event Organizer</span>
+                    <h3 className="text-white text-xl font-bold">Annual Corporate Gathering</h3>
                   </div>
               </div>
-              {/* Portfolio Item 2 - Personal/Wedding */}
-              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg">
+              {/* Portfolio Item 2 - Wedding */}
+              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
                   <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Wedding Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Untuk Perorangan</span>
-                    <h3 className="text-white text-xl font-bold">Cinematic Wedding Clip</h3>
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Wedding Documentation</span>
+                    <h3 className="text-white text-xl font-bold">Intimate Rustic Wedding</h3>
                   </div>
               </div>
-               {/* Portfolio Item 3 - Branding */}
-               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800" alt="Design Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+               {/* Portfolio Item 3 - Tech */}
+               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
+                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Web Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Branding</span>
-                    <h3 className="text-white text-xl font-bold">Identitas Visual Kreatif</h3>
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Web Development</span>
+                    <h3 className="text-white text-xl font-bold">Company Profile & Katalog</h3>
                   </div>
               </div>
            </div>
@@ -378,19 +403,19 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Mengapa pilih <span className="font-serif italic text-jeruk-600">Jerukmanis?</span></h2>
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Kenapa Harus <span className="font-serif italic text-jeruk-600">Kami?</span></h2>
               <div className="space-y-8">
                 <FeatureItem 
-                    title="Bisnis & Personal" 
-                    desc="Kami satu-satunya partner yang fleksibel: Bisa profesional mengurus sistem bisnis Anda, sekaligus estetik mengabadikan momen pernikahan Anda." 
+                    title="All-in-One Solution" 
+                    desc="Gak perlu pusing cari vendor sana-sini. Kami bisa handle konsep event, dokumentasi, hingga publikasi website-nya sekaligus." 
                 />
                 <FeatureItem 
-                    title="Perencanaan & Eksekusi Matang" 
-                    desc="Kami meracik strategi dan tujuan yang tepat, serta mengeksekusinya di media sosial agar tujuan Anda tercapai dengan manis dan terarah." 
+                    title="Konsep Matang & Eksekusi Rapih" 
+                    desc="Kami meracik rundown dan strategi visual yang detail, serta mengeksekusinya di lapangan dengan tim yang profesional." 
                 />
                 <FeatureItem 
-                    title="Hemat Waktu & Biaya" 
-                    desc="Hemat anggaran tanpa perlu rekrut tim sendiri. Anda bisa fokus pada hal lain, biar urusan visual dan digital kami yang kupas tuntas." 
+                    title="Fleksibel & Personal" 
+                    desc="Baik itu event kantor formal atau pernikahan yang intim, kami menyesuaikan gaya kerja dengan kebutuhan unik Anda." 
                 />
               </div>
             </div>
@@ -400,9 +425,9 @@ export default function Home() {
                <div className="relative bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-jeruk-100/50">
                   <h3 className="font-bold text-xl mb-8 border-b pb-4 border-slate-100">Alur Kerja Kami</h3>
                   <div className="space-y-10 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
-                    <Step number="1" title="Diskusi" desc="Ceritakan kebutuhan bisnis atau rencana acara spesial Anda." />
-                    <Step number="2" title="Konsep" desc="Kami meracik strategi dan moodboard visual yang tepat." />
-                    <Step number="3" title="Eksekusi" desc="Proses produksi, editing, dan delivery file final yang manis." />
+                    <Step number="1" title="Konsultasi (Peeling)" desc="Ceritakan rencana event atau kebutuhan digital Anda pada kami." />
+                    <Step number="2" title="Peracikan (Squeezing)" desc="Kami siapkan konsep, moodboard, dan penawaran terbaik." />
+                    <Step number="3" title="Penyajian (Serving)" desc="Eksekusi hari-H atau pengerjaan project hingga tuntas dan manis." />
                   </div>
                </div>
             </div>
@@ -410,21 +435,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. TESTIMONI PENIKMAT (INFINITE MARQUEE - SEAMLESS LOOP) */}
+      {/* 6. TESTIMONI PENIKMAT (MARQUEE) */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Testimoni <span className="font-serif italic text-jeruk-600">Penikmat</span></h2>
-            <p className="text-slate-500 mt-4">Apa kata klien tentang kami.</p>
+            <p className="text-slate-500 mt-4">Kata mereka yang sudah mencicipi layanan kami.</p>
         </div>
 
         {/* Marquee Container */}
         <div className="relative w-full overflow-hidden">
-          {/* Wrapper with mask for fade effect at edges */}
           <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-white to-transparent z-10 hidden md:block" />
           <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10 hidden md:block" />
 
-          {/* Scrolling Content - Duplicate content for seamless loop */}
-          {/* w-max penting agar width mengikuti konten */}
           <div className="flex w-max animate-marquee pause-on-hover">
             {/* Set Pertama */}
             <div className="flex gap-6 px-3">
@@ -450,10 +472,10 @@ export default function Home() {
                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600 rounded-full blur-[80px] opacity-20 -translate-x-1/2 translate-y-1/2"></div>
                
                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 relative z-10 leading-tight">
-                 Siap membuat konten yang <br/> <span className="text-jeruk-500 font-serif italic">Lebih Manis?</span>
+                 Pengen punya momen<br/> <span className="text-jeruk-500 font-serif italic">yang lebih Manis?</span>
                </h2>
                <p className="text-slate-400 mb-10 text-lg max-w-xl mx-auto relative z-10">
-                 Yuk, sampaikan ide kalian pada kami sekarang.
+                 Yuk, diskusikan idemu ke kita sekarang!
                </p>
                <Link 
                 href="https://wa.me/6281234567890"
