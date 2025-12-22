@@ -8,8 +8,7 @@ import {
   ArrowRight, Play, Camera, Monitor, 
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
   Palette, PartyPopper, Code2, Users, Trophy, Target, 
-  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone,
-  ChevronDown
+  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone 
 } from "lucide-react";
 
 // --- DATA TESTIMONI ---
@@ -46,16 +45,6 @@ const testimonialsData = [
   }
 ];
 
-// --- DATA MENU LAYANAN (DROPDOWN) ---
-const navServices = [
-  { title: "Event Organizer", desc: "Corporate, Outing & Festival", icon: PartyPopper, slug: "event-organizer" },
-  { title: "Photography", desc: "Wedding, Product & Event", icon: Camera, slug: "professional-photography" },
-  { title: "Cinematic Video", desc: "Ads, Reels & Profile", icon: Film, slug: "cinematic-video" },
-  { title: "Creative Branding", desc: "Logo, Visual & Sosmed", icon: Palette, slug: "creative-branding" },
-  { title: "Software & Web", desc: "Website Bisnis & App", icon: Code2, slug: "software-web" },
-  { title: "Undangan Digital", desc: "Website Invitation", icon: Smartphone, slug: "undangan-digital" },
-];
-
 // --- KOMPONEN NAVBAR ---
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,7 +79,7 @@ const Navbar = () => {
         <Link href="/" className="flex items-center gap-2 group">
           <img 
             src="/images/logo.png" 
-            alt="Logo" 
+            alt="Logo Jerukmanis" 
             className="w-10 h-10 object-contain group-hover:scale-110 transition-transform" 
           />
           <span className={`text-xl font-bold tracking-tight transition-colors ${scrolled ? "text-slate-900" : "text-slate-900"}`}>
@@ -98,82 +87,15 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* DESKTOP MENU */}
-        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600 items-center">
+        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
             const id = item.toLowerCase().replace(" ", "-");
-            
-            // LOGIKA KHUSUS UNTUK DROPDOWN LAYANAN
-            if (item === "Layanan") {
-              return (
-                <div key={item} className="group relative py-4">
-                  <button 
-                    className="flex items-center gap-1 hover:text-jeruk-600 transition-colors focus:outline-none"
-                    onClick={(e) => { e.preventDefault(); document.getElementById('layanan')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  >
-                    {item}
-                    <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 duration-300" />
-                  </button>
-                  
-                  {/* === MEGA MENU DROPDOWN === */}
-                  <div className="absolute top-full -left-32 w-[800px] bg-white rounded-3xl shadow-2xl border border-slate-100 p-2 opacity-0 invisible translate-y-4 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 ease-out grid grid-cols-12 overflow-hidden z-[60]">
-                    
-                    {/* Kolom Kiri: Grid Menu */}
-                    <div className="col-span-8 p-6 grid grid-cols-2 gap-x-4 gap-y-4">
-                      {navServices.map((service, idx) => (
-                        <Link 
-                          key={idx} 
-                          href={`/layanan/${service.slug}`}
-                          className="flex items-start gap-4 p-3 rounded-xl hover:bg-jeruk-50 transition-colors group/item"
-                        >
-                          <div className="p-2.5 bg-white border border-slate-100 rounded-lg shadow-sm text-jeruk-500 group-hover/item:bg-jeruk-500 group-hover/item:text-white transition-all">
-                            <service.icon className="w-5 h-5" />
-                          </div>
-                          <div>
-                            <h5 className="font-bold text-slate-900 text-sm mb-0.5 group-hover/item:text-jeruk-600 transition-colors">
-                              {service.title}
-                            </h5>
-                            <p className="text-xs text-slate-500 leading-snug">
-                              {service.desc}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-
-                    {/* Kolom Kanan: Banner Promo (Seperti Referensi) */}
-                    <div className="col-span-4 bg-slate-900 relative overflow-hidden rounded-2xl flex flex-col justify-end p-6 group/card">
-                       {/* Hiasan Background */}
-                       <div className="absolute top-0 right-0 w-32 h-32 bg-jeruk-500 rounded-full blur-[40px] opacity-40 translate-x-1/2 -translate-y-1/2"></div>
-                       <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500 rounded-full blur-[40px] opacity-30 -translate-x-1/2 translate-y-1/2"></div>
-                       
-                       <div className="relative z-10">
-                          <span className="bg-jeruk-600 text-white text-[10px] font-bold px-2 py-1 rounded-md mb-3 inline-block">
-                            PROMO BULAN INI
-                          </span>
-                          <h4 className="text-white font-bold text-lg leading-tight mb-2">
-                            Diskon <span className="text-jeruk-400">20%</span> untuk Klien Baru!
-                          </h4>
-                          <p className="text-slate-400 text-xs mb-4 leading-relaxed">
-                            Dapatkan solusi digital & event terbaik khusus bisnis di Yogyakarta.
-                          </p>
-                          <Link href="https://wa.me/6281234567890" className="text-xs font-bold text-white flex items-center gap-2 hover:gap-3 transition-all">
-                            Klaim Sekarang <ArrowRight className="w-3 h-3 text-jeruk-400" />
-                          </Link>
-                       </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-
-            // MENU BIASA
             return (
               <a 
                 key={item} 
                 href={`#${id}`}
                 onClick={(e) => handleScrollTo(e, id)}
-                className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all cursor-pointer py-4"
+                className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all cursor-pointer"
               >
                 {item}
               </a>
@@ -194,7 +116,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* MOBILE MENU (Tetap Standar agar tidak penuh) */}
       <div className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
          <div className="p-6 flex flex-col gap-4">
            {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
@@ -288,7 +209,6 @@ export default function Home() {
 
       {/* 1. HERO SECTION */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        {/* Background Blobs */}
         <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-jeruk-100 rounded-full blur-[100px] opacity-60 translate-x-1/3 -translate-y-1/4 animate-pulse" />
         <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-yellow-100 rounded-full blur-[80px] opacity-50 -translate-x-1/3 translate-y-1/4" />
         
@@ -298,7 +218,6 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
               Solusi <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Kreatif</span>,<br />
               & <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Event</span> <span className="font-serif italic font-light text-slate-800 relative z-10 before:absolute before:bottom-2 before:left-0 before:w-full before:h-3 before:bg-jeruk-200/50 before:-z-10">Manis.</span>
@@ -320,7 +239,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Hero Visual */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -354,7 +272,6 @@ export default function Home() {
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-jeruk-50 rounded-full blur-3xl -z-10"></div>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Foto Tim */}
             <div className="relative">
               <div className="absolute inset-0 bg-jeruk-200 rounded-[2.5rem] rotate-3 transform translate-x-2 translate-y-2 -z-10"></div>
               <img 
@@ -375,7 +292,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Teks Cerita */}
             <div>
               <span className="text-jeruk-600 font-bold tracking-wider text-sm uppercase mb-2 block">Tentang Kami</span>
               <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
@@ -409,7 +325,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. LAYANAN SECTION (DENGAN SLUG) */}
+      {/* 3. LAYANAN SECTION (FLEX LAYOUT - CENTER ALIGNMENT) */}
       <section id="layanan" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -417,55 +333,69 @@ export default function Home() {
             <p className="text-slate-600 max-w-2xl mx-auto">Solusi lengkap untuk kebutuhan Acara, Visual, dan Digital Anda.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+          {/* Menggunakan Flexbox & Justify Center untuk align tengah */}
+          <div className="flex flex-wrap justify-center gap-8">
              
              {/* Card 1: Event Organizer */}
-             <ServiceCard 
-              icon={<PartyPopper className="w-8 h-8"/>}
-              title="Event Organizer"
-              slug="event-organizer"
-              items={["Corporate Gathering & Outing", "Product Launching & Activation", "Music Concert & Festival", "Professional Live Streaming"]}
-            />
+             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
+                <ServiceCard 
+                  icon={<PartyPopper className="w-8 h-8"/>}
+                  title="Event Organizer"
+                  slug="event-organizer"
+                  items={["Corporate Gathering & Outing", "Product Launching & Activation", "Music Concert & Festival", "Professional Live Streaming"]}
+                />
+             </div>
 
-             {/* Card 2: Professional Photography */}
-            <ServiceCard 
-              icon={<Camera className="w-8 h-8"/>}
-              title="Professional Photography"
-              slug="professional-photography"
-              items={["Wedding & Pre-wedding", "Event Documentation", "Product Catalog", "Personal / Graduation"]}
-            />
+             {/* Card 2: Visual Documentation (MERGED) */}
+             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
+                <ServiceCard 
+                  icon={<Camera className="w-8 h-8"/>}
+                  title="Visual Documentation"
+                  slug="visual-documentation"
+                  items={["Event Documentation", "Company Profile Video", "Product Commercial & Catalogue", "Social Media Content Creation"]}
+                />
+             </div>
              
-             {/* Card 3: Videografi */}
-             <ServiceCard 
-              icon={<Film className="w-8 h-8"/>}
-              title="Cinematic Video"
-              slug="cinematic-video"
-              items={["Wedding Cinematic Clip", "Company Profile Video", "Commercial Ads & Reels", "After Movie Event"]}
-            />
-            
-            {/* Card 4: Creative Branding */}
-             <ServiceCard 
-              icon={<Palette className="w-8 h-8"/>}
-              title="Creative Branding"
-              slug="creative-branding"
-              items={["Brand Identity (Logo)", "Social Media Design", "Content Creation", "Visual Strategy"]}
-            />
+             {/* Card 3: Creative Branding */}
+             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
+                <ServiceCard 
+                  icon={<Palette className="w-8 h-8"/>}
+                  title="Creative Branding"
+                  slug="creative-branding"
+                  items={["Brand Identity (Logo)", "Social Media Design", "Content Creation", "Visual Strategy"]}
+                />
+             </div>
 
-            {/* Card 5: Undangan Digital */}
-             <ServiceCard 
-              icon={<Smartphone className="w-8 h-8"/>}
-              title="Undangan Digital"
-              slug="undangan-digital"
-              items={["Website Invitation (Wedding/Event)", "Video Invitation", "Digital RSVP System"]}
-            />
+             {/* Card 4: Undangan Digital */}
+             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
+                <ServiceCard 
+                  icon={<Smartphone className="w-8 h-8"/>}
+                  title="Undangan Digital"
+                  slug="undangan-digital"
+                  items={["Website Invitation (Event/Wedding)", "Video Invitation", "Digital RSVP System"]}
+                />
+             </div>
 
-             {/* Card 6: Software Dev */}
-            <ServiceCard 
-              icon={<Code2 className="w-8 h-8"/>}
-              title="Software & Web"
-              slug="software-web"
-              items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio", "Sistem Kasir"]}
-            />
+             {/* Card 5: Software Web */}
+             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
+                <ServiceCard 
+                  icon={<Code2 className="w-8 h-8"/>}
+                  title="Software & Web"
+                  slug="software-web"
+                  items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio", "Sistem Kasir"]}
+                />
+             </div>
+
+             {/* Card Baru: Professional Live Streaming */}
+            <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
+                <ServiceCard 
+                  icon={<Monitor className="w-8 h-8"/>} 
+                  title="Professional Live Streaming"
+                  slug="professional-live-streaming"
+                  items={["Multi-Camera Broadcasting", "Hybrid Event (Zoom/Meet)", "YouTube & IG Live", "Clear Audio Direct"]}
+                />
+            </div>
+
           </div>
         </div>
       </section>
@@ -496,7 +426,7 @@ export default function Home() {
               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
                   <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Wedding Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Wedding Documentation</span>
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Visual Documentation</span>
                     <h3 className="text-white text-xl font-bold">Intimate Rustic Wedding</h3>
                   </div>
               </div>
@@ -610,7 +540,7 @@ export default function Home() {
 // --- SUB-KOMPONEN KECIL ---
 
 const ServiceCard = ({ icon, title, items, slug }: { icon: any, title: string, items: string[], slug: string }) => (
-  <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col">
+  <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col h-full">
     <div className="w-14 h-14 bg-jeruk-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-jeruk-500 transition-colors duration-300 flex-shrink-0">
       <div className="text-jeruk-600 group-hover:text-white transition-colors duration-300">
         {icon}

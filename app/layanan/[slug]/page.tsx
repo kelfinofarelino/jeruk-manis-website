@@ -2,10 +2,10 @@
 
 import React, { use, useEffect } from "react"; 
 import Link from "next/link";
-import Lenis from "lenis"; // Import Lenis
+import Lenis from "lenis"; 
 import { 
   ArrowLeft, CheckCircle2, Phone, Mail, 
-  BadgeCheck, Clock, ShieldCheck 
+  BadgeCheck, Clock 
 } from "lucide-react";
 
 // --- TYPE DEFINITION ---
@@ -19,98 +19,74 @@ type ServiceType = {
   pricing: { name: string; price: string; features: string[]; recommended?: boolean }[];
 };
 
-// --- DATABASE KONTEN LAYANAN LENGKAP ---
+// --- DATABASE KONTEN LAYANAN (UPDATED: NO WEDDING, MERGED PHOTO/VIDEO) ---
 const servicesData: Record<string, ServiceType> = {
+  
+  // 1. EVENT ORGANIZER (Disesuaikan untuk Corporate/Umum)
   "event-organizer": {
     title: "Event Organizer",
-    tagline: "Wujudkan Acara Impian Tanpa Ribet",
-    description: "Kami menangani seluruh aspek acara Anda, mulai dari konsep kreatif, manajemen vendor, hingga eksekusi di lapangan. Tim kami berpengalaman menangani corporate gathering, launching produk, hingga konser musik.",
+    tagline: "Eksekusi Event Profesional & Berkesan",
+    description: "Partner strategis untuk kebutuhan acara perusahaan dan publik. Kami menangani mulai dari konsep kreatif, manajemen panggung, hingga laporan pasca-acara. Fokus kami adalah kelancaran acara dan kepuasan audiens.",
     image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1600",
     benefits: [
-      { title: "Bebas Stress", desc: "Kami urus perizinan, vendor, dan rundown. Anda tinggal datang dan menikmati acara." },
-      { title: "Budget Efisien", desc: "Kami memiliki relasi vendor luas untuk mendapatkan harga terbaik sesuai budget Anda." },
-      { title: "Konsep Kreatif", desc: "Setiap event kami rancang unik, tidak copy-paste, sesuai identitas brand/klien." }
+      { title: "Manajemen End-to-End", desc: "Kami urus vendor, rundown, hingga perizinan. Anda fokus pada tujuan acara." },
+      { title: "Budget Transparan", desc: "RAB detail dan efisien sesuai budget perusahaan/organisasi." },
+      { title: "Tim Profesional", desc: "Crew berpengalaman menangani acara formal maupun festival hiburan." }
     ],
-    process: ["Konsultasi & Briefing", "Penyusunan Konsep & RAB", "Pre-Event & Produksi", "Eksekusi Hari-H", "Laporan Pertanggungjawaban"],
+    process: ["Briefing & Brainstorming", "Proposal Konsep & RAB", "Produksi & Persiapan", "Running Event (Hari-H)", "Laporan Event"],
     pricing: [
       {
-        name: "Intimate Package",
-        price: "Mulai Rp 15 Jt",
-        features: ["Max 50 Pax", "Konsep Acara Sederhana", "1 MC & 1 Fotografer", "Dekorasi Minimalis", "Sound System Portable"]
+        name: "Community / Seminar",
+        price: "Mulai Rp 10 Jt",
+        features: ["Max 100 Pax", "Backdrop & Stage Simple", "Sound System Standard", "1 MC Formal", "Dokumentasi Foto"]
       },
       {
         name: "Corporate Gathering",
-        price: "Mulai Rp 45 Jt",
-        features: ["Max 200 Pax", "Full Event Concept", "Venue Finding", "Dokumentasi Foto & Video", "Entertainment (Band Akustik)", "Doorprize Management"],
+        price: "Mulai Rp 35 Jt",
+        features: ["Max 300 Pax", "Venue Finding", "Full Entertainment (Band)", "Gala Dinner Setup", "Team Building Games", "Doorprize Management"],
         recommended: true
       },
       {
-        name: "Grand Event",
+        name: "Grand Launching / Festival",
         price: "Hubungi Kami",
-        features: ["Unlimited Pax", "Skala Konser / Festival", "Artis Nasional", "Stage & Rigging Besar", "Multi-Camera Live Cam", "Full Security Team"]
+        features: ["Skala Besar (>500 Pax)", "Rigging & Lighting Show", "Guest Star Nasional", "Multimedia Visual (LED)", "Keamanan & Perizinan Lengkap"]
       }
     ]
   },
-  "professional-photography": {
-    title: "Professional Photography",
-    tagline: "Tangkap Momen Terbaik, Abadi Selamanya",
-    description: "Layanan fotografi profesional menggunakan peralatan high-end (Sony Alpha Series) dan teknik lighting studio maupun natural. Kami fokus menangkap emosi dan detail estetik.",
-    image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1600",
+
+  // 2. VISUAL DOCUMENTATION (GABUNGAN FOTO & VIDEO)
+  "visual-documentation": {
+    title: "Visual Documentation",
+    tagline: "Foto & Video Profesional untuk Bisnis",
+    description: "Solusi satu pintu untuk kebutuhan visual Anda. Kami menggabungkan fotografi tajam dan videografi sinematik untuk mendokumentasikan event, membuat profil perusahaan, atau iklan produk komersial.",
+    image: "https://images.unsplash.com/photo-1764924777528-81dea357af97?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     benefits: [
-      { title: "High Resolution", desc: "File foto tajam, siap cetak ukuran besar tanpa pecah." },
-      { title: "Color Grading", desc: "Setiap foto diedit warna sesuai mood (warm, bright, moody, dll)." },
-      { title: "Fast Delivery", desc: "Preview foto H+1, hasil lengkap maksimal 7 hari kerja." }
+      { title: "Hybrid Team", desc: "Satu tim solid menangani foto dan video sekaligus agar hasil senada." },
+      { title: "Commercial Standard", desc: "Menggunakan peralatan standar industri (4K Video, High-Res Photo)." },
+      { title: "Asset Siap Pakai", desc: "Hasil edit disesuaikan untuk berbagai platform (Instagram, YouTube, Website)." }
     ],
-    process: ["Diskusi Konsep/Moodboard", "Sesi Pemotretan", "Sortir & Editing", "Penyerahan File Cloud"],
+    process: ["Konsep & Moodboard", "Produksi (Shooting Day)", "Editing & Coloring", "Revisi", "Final Delivery"],
     pricing: [
       {
-        name: "Personal / Graduation",
-        price: "Rp 750.000",
-        features: ["1 Jam Sesi", "1 Lokasi", "30 Edited Photos", "All Files (Google Drive)", "Max 2 Orang"]
+        name: "Event Documentation",
+        price: "Rp 3.500.000",
+        features: ["1 Fotografer + 1 Videografer", "Durasi 4-6 Jam", "Video Highlight (1-3 Menit)", "100+ Foto Edited", "Google Drive Delivery"]
       },
       {
-        name: "Pre-Wedding",
-        price: "Rp 2.500.000",
-        features: ["4 Jam Sesi", "2 Lokasi & 2 Outfit", "60 Edited Photos", "1 Cetak 16RP + Frame", "Cinematic Teaser 1 Menit"],
+        name: "Product & F&B Commercial",
+        price: "Rp 5.000.000",
+        features: ["1 Hari Sesi Studio/On-Loc", "Video Reels/TikTok (3 Video)", "15 Foto Produk High-Res", "Model & Stylist (Optional)", "Lisensi Komersial"],
         recommended: true
       },
       {
-        name: "Wedding Documentation",
-        price: "Rp 4.500.000",
-        features: ["Full Day Coverage (Akad-Resepsi)", "2 Fotografer", "Unlimited Shoot", "Wedding Book Album", "Flashdisk Eksklusif"]
+        name: "Company Profile Video",
+        price: "Mulai Rp 8.500.000",
+        features: ["Konsep Naskah & Storyboard", "Shooting 1-2 Hari", "Interview Direksi/Staff", "Drone Aerial Shot", "Voice Over & Grafis"]
       }
     ]
   },
-  "cinematic-video": {
-    title: "Cinematic Video",
-    tagline: "Ceritakan Kisah Lewat Visual Bergerak",
-    description: "Produksi video dengan standar sinematik. Mulai dari video profil perusahaan, iklan media sosial, hingga dokumentasi pernikahan yang menyentuh hati.",
-    image: "https://images.unsplash.com/photo-1579632652768-6cb9dcf85912?auto=format&fit=crop&q=80&w=1600",
-    benefits: [
-      { title: "Storytelling Kuat", desc: "Kami tidak sekadar merekam, tapi merangkai cerita yang bermakna." },
-      { title: "4K Quality", desc: "Perekaman resolusi tinggi untuk hasil visual yang memanjakan mata." },
-      { title: "Audio Jernih", desc: "Menggunakan mic professional untuk kualitas suara terbaik." }
-    ],
-    process: ["Script & Storyboard", "Shooting Day", "Editing & Coloring", "Revisi", "Final Render"],
-    pricing: [
-      {
-        name: "Social Media Reels",
-        price: "Rp 1.500.000",
-        features: ["Durasi s.d 60 Detik", "Vertical Format (9:16)", "Shooting 2-3 Jam", "Background Music License", "1x Revisi"]
-      },
-      {
-        name: "Event Highlight",
-        price: "Rp 3.000.000",
-        features: ["Durasi 3-5 Menit", "Cinematic Look", "Shooting Full Event", "Interview Peserta", "Drone Shot (Aerial)", "2x Revisi"],
-        recommended: true
-      },
-      {
-        name: "Company Profile",
-        price: "Mulai Rp 7.500.000",
-        features: ["Konsep Mendalam & Scripting", "Shooting 1-2 Hari", "Voice Over Professional", "Motion Graphic Intro", "Full Equipment Crew"]
-      }
-    ]
-  },
+
+  // 3. CREATIVE BRANDING (No Change)
   "creative-branding": {
     title: "Creative Branding",
     tagline: "Identitas Visual yang Beda & Berkarakter",
@@ -125,52 +101,56 @@ const servicesData: Record<string, ServiceType> = {
     pricing: [
       {
         name: "Logo Starter",
-        price: "Rp 1.200.000",
+        price: "Rp 1.500.000",
         features: ["2 Alternatif Desain", "Filosofi Logo", "Color Palette", "File Master (AI, PNG, PDF)", "2x Revisi Minor"]
       },
       {
         name: "Brand Identity",
-        price: "Rp 3.500.000",
+        price: "Rp 4.000.000",
         features: ["3 Alternatif Logo", "Brand Guidelines Book (PDF)", "Kartu Nama & Kop Surat", "Template Instagram Feed", "Mockup Penggunaan"],
         recommended: true
       },
       {
         name: "Socmed Management",
-        price: "Rp 2.500.000 /bln",
+        price: "Rp 3.000.000 /bln",
         features: ["12 Konten Feed/Reels", "Caption & Hashtag", "Admin Posting", "Monthly Report", "Free Desain Story"]
       }
     ]
   },
+
+  // 4. UNDANGAN DIGITAL (Rebranded to Corporate/Event)
   "undangan-digital": {
     title: "Undangan Digital",
-    tagline: "Sebar Kabar Bahagia Lebih Praktis",
-    description: "Undangan berbasis website yang elegan, hemat biaya, dan ramah lingkungan. Dilengkapi fitur RSVP, peta lokasi, dan galeri foto.",
-    image: "https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&q=80&w=1600",
+    tagline: "Undangan Event Modern & Paperless",
+    description: "Solusi undangan digital berbasis website untuk Grand Opening, Seminar, Gala Dinner, atau Ulang Tahun Perusahaan. Tampil profesional, hemat biaya, dan mudah disebarkan via WhatsApp.",
+    image: "https://plus.unsplash.com/premium_photo-1682310479841-a3def42359c6?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     benefits: [
-      { title: "Unlimited Tamu", desc: "Satu link bisa disebar ke ribuan tamu tanpa biaya tambahan." },
-      { title: "Fitur Canggih", desc: "Navigasi peta, hitung mundur, dan kirim ucapan langsung." },
-      { title: "Aktif Selamanya", desc: "Link undangan bisa diakses kapan saja sebagai kenangan." }
+      { title: "Database Tamu", desc: "Fitur RSVP memudahkan pendataan jumlah tamu yang akan hadir." },
+      { title: "Profesional", desc: "Desain elegan menyesuaikan corporate identity perusahaan." },
+      { title: "Navigasi Peta", desc: "Terintegrasi langsung dengan Google Maps lokasi acara." }
     ],
-    process: ["Pilih Tema", "Isi Data Mempelai/Acara", "Preview", "Revisi", "Publish"],
+    process: ["Pilih Layout/Tema", "Input Data Acara", "Preview", "Revisi", "Publish Link"],
     pricing: [
       {
         name: "Video Invitation",
-        price: "Rp 150.000",
-        features: ["Format MP4 (Story/Feed)", "Durasi 60 Detik", "Musik Latar", "Bisa Pakai Foto", "Revisi 1x"]
+        price: "Rp 250.000",
+        features: ["Format MP4 (Vertical)", "Durasi 30-60 Detik", "Motion Graphic", "Musik Latar", "Revisi 1x"]
       },
       {
-        name: "Web Basic",
-        price: "Rp 250.000",
-        features: ["Tema Template Premium", "Info Acara & Peta", "Galeri 5 Foto", "RSVP Form", "Countdown Timer"],
+        name: "Web Event Basic",
+        price: "Rp 350.000",
+        features: ["Template Corporate", "Info Acara & Rundown", "Peta Lokasi", "Form RSVP Sederhana", "Countdown Timer"],
         recommended: true
       },
       {
-        name: "Web Custom",
-        price: "Rp 750.000",
-        features: ["Desain Custom Sesuai Tema", "Smart Guest Name (Nama Tamu di Cover)", "Fitur Kirim Amplop Digital", "Background Music", "Galeri Unlimited"]
+        name: "Web Event Custom",
+        price: "Rp 900.000",
+        features: ["Desain Custom Sesuai Brand", "Nama Tamu di Cover (Personalized)", "QR Code Check-in System", "Galeri Foto/Video", "Domain .com (1 Tahun)"]
       }
     ]
   },
+
+  // 5. SOFTWARE & WEB (No Change)
   "software-web": {
     title: "Software & Web",
     tagline: "Digitalisasi Bisnis dengan Teknologi Modern",
@@ -185,31 +165,62 @@ const servicesData: Record<string, ServiceType> = {
     pricing: [
       {
         name: "Landing Page",
-        price: "Rp 1.500.000",
+        price: "Rp 1.800.000",
         features: ["One Page Website", "Desain Modern", "Tombol WhatsApp", "Hosting & Domain 1 Thn", "SEO Basic"]
       },
       {
         name: "Company Profile",
-        price: "Rp 3.500.000",
+        price: "Rp 4.500.000",
         features: ["Hingga 5 Halaman", "CMS (Bisa Edit Sendiri)", "Email Perusahaan", "Google Analytics", "Free Maintenance 3 Bln"],
         recommended: true
       },
       {
         name: "Toko Online / Custom",
-        price: "Mulai Rp 7 Jt",
+        price: "Mulai Rp 8 Jt",
         features: ["Fitur Keranjang Belanja", "Hitung Ongkir Otomatis", "Payment Gateway", "Laporan Penjualan", "Sistem Member"]
       }
     ]
-  }
+  },
+
+  "professional-live-streaming": {
+    title: "Professional Live Streaming",
+    tagline: "Jangkau Audiens Lebih Luas Secara Real-Time",
+    description: "Layanan siaran langsung (broadcasting) profesional untuk menjembatani event offline Anda dengan audiens online. Kami menggunakan standar broadcast televisi dengan mixing visual yang dinamis, audio jernih, dan koneksi stabil untuk Webinar, Talkshow, Wisuda, hingga Konser Musik.",
+    image: "https://images.unsplash.com/photo-1594394489098-74ac04c0fc2e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    benefits: [
+      { title: "Multi-Platform", desc: "Bisa live stream ke YouTube, Zoom, Instagram, dan Facebook secara bersamaan." },
+      { title: "Broadcast Quality", desc: "Tampilan profesional dengan fitur Lower Third (Nama), Logo, dan Transisi mulus." },
+      { title: "Hybrid Ready", desc: "Mengintegrasikan peserta di lokasi dan peserta online (Zoom) agar saling berinteraksi." }
+    ],
+    process: ["Site Survey & Tes Internet", "Setup Equipment H-1", "Rehearsal / GR", "Live Production", "Recording Delivery"],
+    pricing: [
+      {
+        name: "Basic Webinar",
+        price: "Rp 2.500.000",
+        features: ["2 Kamera Statis", "Direct Laptop Presentation", "Streaming Operator", "Zoom / YouTube", "Durasi Max 3 Jam"]
+      },
+      {
+        name: "Pro Multi-Cam",
+        price: "Rp 7.500.000",
+        features: ["3 Kamera (Wide, Medium, Close)", "Video Switcher System", "Audio Direct Mixing", "Operator Tim Lengkap", "Full HD Recording"],
+        recommended: true
+      },
+      {
+        name: "Grand Production",
+        price: "Hubungi Kami",
+        features: ["Wireless Video System", "Jimmy Jib / Crane", "Bonded Internet (Anti Putus)", "Custom Motion Graphic", "Show Director"]
+      }
+    ]
+  },
 };
 
 // --- KOMPONEN UTAMA ---
 export default function ServiceDetail({ params }: { params: Promise<{ slug: string }> }) {
   
-  // 1. Unwrap params menggunakan React.use() untuk Next.js 15
+  // Unwrap params
   const { slug } = use(params);
 
-  // 2. Setup Lenis Smooth Scroll
+  // Setup Lenis Smooth Scroll
   useEffect(() => {
     const lenis = new Lenis();
     function raf(time: number) {
@@ -227,6 +238,7 @@ export default function ServiceDetail({ params }: { params: Promise<{ slug: stri
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white p-6 text-center">
         <h1 className="text-4xl font-bold text-slate-900 mb-4">Layanan Tidak Ditemukan</h1>
+        <p className="text-slate-500 mb-8">Maaf, layanan yang Anda cari belum tersedia.</p>
         <Link href="/" className="px-6 py-3 bg-jeruk-600 text-white rounded-full font-bold hover:bg-jeruk-700 transition-all">
           Kembali ke Beranda
         </Link>
