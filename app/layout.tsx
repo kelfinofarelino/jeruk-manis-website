@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Atau font lain yang Anda pakai
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jerukmanis Creative",
+  title: "Jerukmanis | Creative Agency & Event Organizer Jogja",
   description: "Creative Agency & Event Organizer Jogja",
   icons: {
     icon: '/brand-icon.png',

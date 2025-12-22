@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Lenis from "lenis"; // Import Lenis
+import Lenis from "lenis";
 import { 
   ArrowRight, Play, Camera, Monitor, 
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
@@ -63,8 +63,7 @@ const Navbar = () => {
     setIsOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      // Lenis akan menangani scroll, tapi kita trigger manual ke element
-      element.scrollIntoView({ behavior: "smooth" }); 
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -179,30 +178,23 @@ const Footer = () => (
 
 export default function Home() {
   
-  // --- LENIS SMOOTH SCROLL SETUP ---
+  // --- LENIS SMOOTH SCROLL ---
   useEffect(() => {
     const lenis = new Lenis();
-
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, []);
 
   return (
     <main className="min-h-screen bg-white selection:bg-jeruk-200 selection:text-jeruk-900 font-sans">
       <Navbar />
       
-      {/* GLOBAL CSS: Marquee Only (Lenis handles scroll behavior) */}
+      {/* GLOBAL CSS */}
       <style jsx global>{`
-        /* scroll-behavior: smooth; <- DIHAPUS karena diganti Lenis */
-        
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); } 
@@ -227,7 +219,6 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* BADGE DIHAPUS DI SINI SESUAI REQUEST */}
             
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
               Solusi <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Kreatif</span>,<br />
@@ -330,7 +321,7 @@ export default function Home() {
                    <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Heart className="w-5 h-5" /></div>
                    <div>
                       <h4 className="font-bold text-2xl text-slate-900">20+</h4>
-                      <p className="text-sm text-slate-500">Klien Bahagia</p>
+                      <p className="text-sm text-slate-500">Klien Senang</p>
                    </div>
                 </div>
               </div>
@@ -339,7 +330,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. LAYANAN SECTION */}
+      {/* 3. LAYANAN SECTION (DENGAN SLUG) */}
       <section id="layanan" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -353,6 +344,7 @@ export default function Home() {
              <ServiceCard 
               icon={<PartyPopper className="w-8 h-8"/>}
               title="Event Organizer"
+              slug="event-organizer"
               items={["Corporate Gathering & Outing", "Product Launching & Activation", "Music Concert & Festival", "Professional Live Streaming"]}
             />
 
@@ -360,6 +352,7 @@ export default function Home() {
             <ServiceCard 
               icon={<Camera className="w-8 h-8"/>}
               title="Professional Photography"
+              slug="professional-photography"
               items={["Wedding & Pre-wedding", "Event Documentation", "Product Catalog", "Personal / Graduation"]}
             />
              
@@ -367,6 +360,7 @@ export default function Home() {
              <ServiceCard 
               icon={<Film className="w-8 h-8"/>}
               title="Cinematic Video"
+              slug="cinematic-video"
               items={["Wedding Cinematic Clip", "Company Profile Video", "Commercial Ads & Reels", "After Movie Event"]}
             />
             
@@ -374,6 +368,7 @@ export default function Home() {
              <ServiceCard 
               icon={<Palette className="w-8 h-8"/>}
               title="Creative Branding"
+              slug="creative-branding"
               items={["Brand Identity (Logo)", "Social Media Design", "Content Creation", "Visual Strategy"]}
             />
 
@@ -381,6 +376,7 @@ export default function Home() {
              <ServiceCard 
               icon={<Smartphone className="w-8 h-8"/>}
               title="Undangan Digital"
+              slug="undangan-digital"
               items={["Website Invitation (Wedding/Event)", "Video Invitation", "Digital RSVP System"]}
             />
 
@@ -388,6 +384,7 @@ export default function Home() {
             <ServiceCard 
               icon={<Code2 className="w-8 h-8"/>}
               title="Software & Web"
+              slug="software-web"
               items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio", "Sistem Kasir"]}
             />
           </div>
@@ -408,7 +405,7 @@ export default function Home() {
            </div>
            
            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Portfolio Item 1 - Event */}
+              {/* Portfolio Item 1 */}
               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
                   <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" alt="Event Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
@@ -416,7 +413,7 @@ export default function Home() {
                     <h3 className="text-white text-xl font-bold">Annual Corporate Gathering</h3>
                   </div>
               </div>
-              {/* Portfolio Item 2 - Wedding */}
+              {/* Portfolio Item 2 */}
               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
                   <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Wedding Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
@@ -424,7 +421,7 @@ export default function Home() {
                     <h3 className="text-white text-xl font-bold">Intimate Rustic Wedding</h3>
                   </div>
               </div>
-               {/* Portfolio Item 3 - Tech */}
+               {/* Portfolio Item 3 */}
                <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
                   <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Web Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
@@ -533,7 +530,7 @@ export default function Home() {
 
 // --- SUB-KOMPONEN KECIL ---
 
-const ServiceCard = ({ icon, title, items }: { icon: any, title: string, items: string[] }) => (
+const ServiceCard = ({ icon, title, items, slug }: { icon: any, title: string, items: string[], slug: string }) => (
   <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col">
     <div className="w-14 h-14 bg-jeruk-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-jeruk-500 transition-colors duration-300 flex-shrink-0">
       <div className="text-jeruk-600 group-hover:text-white transition-colors duration-300">
@@ -553,9 +550,9 @@ const ServiceCard = ({ icon, title, items }: { icon: any, title: string, items: 
     </ul>
 
     <div className="mt-8 pt-4 border-t border-slate-100">
-        <button className="text-jeruk-600 font-bold text-sm flex items-center gap-2 group/btn hover:gap-4 transition-all">
+        <Link href={`/layanan/${slug}`} className="text-jeruk-600 font-bold text-sm flex items-center gap-2 group/btn hover:gap-4 transition-all">
             Lihat Detail <ArrowRight className="w-4 h-4"/>
-        </button>
+        </Link>
     </div>
   </div>
 );
