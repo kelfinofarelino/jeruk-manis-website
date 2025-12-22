@@ -7,3 +7,35 @@ body {
   background-color: white;
   color: #0f172a;
 }
+
+/* Kustomisasi Scrollbar untuk Chrome, Safari, dan Edge */
+@layer utilities {
+  /* Lebar scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px; /* Lebar untuk vertical scroll */
+    height: 10px; /* Tinggi untuk horizontal scroll */
+  }
+
+  /* Track (Jalur lintasan scrollbar - backgroundnya) */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Bisa diganti transparan atau warna lain */
+    border-radius: 5px;
+  }
+
+  /* Handle (Bagian yang bergerak/digeser) - INI YANG ORANYE */
+  ::-webkit-scrollbar-thumb {
+    background: #f97316; /* Ini kode warna oranye (Tailwind Orange-500) */
+    border-radius: 5px;
+  }
+
+  /* Efek saat di-hover (opsional, biar makin interaktif) */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ea580c; /* Oranye lebih gelap (Orange-600) */
+  }
+}
+
+/* Kustomisasi Scrollbar untuk Firefox (Syntax beda sendiri) */
+* {
+  scrollbar-width: thin; /* Pilihan: auto, thin, none */
+  scrollbar-color: #f97316 #f1f1f1; /* thumb color | track color */
+}
