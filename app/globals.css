@@ -32,10 +32,56 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #ea580c; /* Oranye lebih gelap (Orange-600) */
   }
+
+  @keyframes shake-head {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-8deg); } /* Geleng kiri */
+    40% { transform: rotate(8deg); }  /* Geleng kanan */
+    60% { transform: rotate(-4deg); } /* Kiri dikit */
+    80% { transform: rotate(4deg); }  /* Kanan dikit */
+  }
+
+  .animate-shake-head {
+    /* Durasi 2 detik, diulang terus, titik putar di bawah */
+    animation: shake-head 2s ease-in-out infinite;
+    transform-origin: bottom center;
+    display: inline-block; /* Penting agar transform-origin berfungsi */
+  }
 }
 
 /* Kustomisasi Scrollbar untuk Firefox (Syntax beda sendiri) */
 * {
   scrollbar-width: thin; /* Pilihan: auto, thin, none */
   scrollbar-color: #f97316 #f1f1f1; /* thumb color | track color */
+}
+
+/* globals.css */
+
+@layer utilities {
+  /* Animasi Mengambang Pelan */
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+  }
+
+  /* Animasi Berdenyut untuk Ikon Error */
+  @keyframes pulse-orange {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
+    70% { box-shadow: 0 0 0 20px rgba(249, 115, 22, 0); }
+  }
+  .animate-pulse-orange {
+    animation: pulse-orange 2s infinite;
+  }
+  
+  /* Background Grid Pattern Halus */
+  .bg-grid-pattern {
+      background-image: radial-gradient(rgba(249, 115, 22, 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+  }
+  .dark .bg-grid-pattern {
+      background-image: radial-gradient(rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+  }
 }
