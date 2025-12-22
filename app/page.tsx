@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Lenis from "lenis"; // Import Lenis
 import { 
   ArrowRight, Play, Camera, Monitor, 
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
@@ -49,7 +50,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Efek Scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -57,6 +57,16 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      // Lenis akan menangani scroll, tapi kita trigger manual ke element
+      element.scrollIntoView({ behavior: "smooth" }); 
+    }
+  };
 
   return (
     <nav 
@@ -67,7 +77,6 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <img 
             src="/images/logo.png" 
@@ -79,20 +88,22 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Menu Desktop */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
-          {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => (
-            <Link 
-              key={item} 
-              href={`#${item.toLowerCase().replace(" ", "-")}`} 
-              className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all"
-            >
-              {item}
-            </Link>
-          ))}
+          {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
+            const id = item.toLowerCase().replace(" ", "-");
+            return (
+              <a 
+                key={item} 
+                href={`#${id}`}
+                onClick={(e) => handleScrollTo(e, id)}
+                className="hover:text-jeruk-600 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-jeruk-500 hover:after:w-full after:transition-all cursor-pointer"
+              >
+                {item}
+              </a>
+            );
+          })}
         </div>
 
-        {/* CTA Button & Mobile Toggle */}
         <div className="flex items-center gap-4">
           <Link 
             href="https://wa.me/6281234567890" 
@@ -106,14 +117,21 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
          <div className="p-6 flex flex-col gap-4">
-           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => (
-            <Link key={item} href={`#${item.toLowerCase().replace(" ", "-")}`} onClick={() => setIsOpen(false)} className="text-lg font-medium text-slate-800 hover:text-jeruk-600">
-              {item}
-            </Link>
-          ))}
+           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
+             const id = item.toLowerCase().replace(" ", "-");
+             return (
+              <a 
+                key={item} 
+                href={`#${id}`} 
+                onClick={(e) => handleScrollTo(e, id)}
+                className="text-lg font-medium text-slate-800 hover:text-jeruk-600 cursor-pointer"
+              >
+                {item}
+              </a>
+             );
+           })}
          </div>
       </div>
     </nav>
@@ -160,12 +178,31 @@ const Footer = () => (
 );
 
 export default function Home() {
+  
+  // --- LENIS SMOOTH SCROLL SETUP ---
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <main className="min-h-screen bg-white selection:bg-jeruk-200 selection:text-jeruk-900 font-sans">
       <Navbar />
       
-      {/* CSS untuk Marquee */}
+      {/* GLOBAL CSS: Marquee Only (Lenis handles scroll behavior) */}
       <style jsx global>{`
+        /* scroll-behavior: smooth; <- DIHAPUS karena diganti Lenis */
+        
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); } 
@@ -189,8 +226,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-          > 
-            {/* UPDATED H1 SECTION: "Event" disamakan gayanya dengan "Kreatif" */}
+          >
+            {/* BADGE DIHAPUS DI SINI SESUAI REQUEST */}
+            
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
               Solusi <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Kreatif</span>,<br />
               & <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Event</span> <span className="font-serif italic font-light text-slate-800 relative z-10 before:absolute before:bottom-2 before:left-0 before:w-full before:h-3 before:bg-jeruk-200/50 before:-z-10">Manis.</span>
@@ -285,14 +323,14 @@ export default function Home() {
                    <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Target className="w-5 h-5" /></div>
                    <div>
                       <h4 className="font-bold text-2xl text-slate-900">50+</h4>
-                      <p className="text-sm text-slate-500">Projek</p>
+                      <p className="text-sm text-slate-500">Event & Projek</p>
                    </div>
                 </div>
                 <div className="flex items-start gap-3">
                    <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Heart className="w-5 h-5" /></div>
                    <div>
                       <h4 className="font-bold text-2xl text-slate-900">20+</h4>
-                      <p className="text-sm text-slate-500">Klien Happy</p>
+                      <p className="text-sm text-slate-500">Klien Bahagia</p>
                    </div>
                 </div>
               </div>
