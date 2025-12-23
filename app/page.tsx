@@ -11,13 +11,13 @@ import {
   Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone 
 } from "lucide-react";
 
-// --- DATA TESTIMONI ---
+// --- DATA TESTIMONI (UPDATED: NO WEDDING) ---
 const testimonialsData = [
   {
-    name: "Sari & Raka",
-    role: "Happy Couple",
-    text: "MasyaAllah, foto wedding-nya magis banget! Timnya sabar mengarahkan gaya, hasil videonya juga cinematic parah. Momen sekali seumur hidup jadi abadi.",
-    initial: "SR"
+    name: "Clarissa Putri",
+    role: "Sweet 17 Queen",
+    text: "Pesta ulang tahun ke-17 ku bener-bener pecah! Temanya sesuai moodboard, dekorasinya aesthetic, dan MC-nya bikin suasana hidup banget. Thank you Jerukmanis!",
+    initial: "CP"
   },
   {
     name: "PT Maju Bersama",
@@ -87,6 +87,7 @@ const Navbar = () => {
           </span>
         </Link>
 
+        {/* Menu Desktop */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
             const id = item.toLowerCase().replace(" ", "-");
@@ -103,6 +104,7 @@ const Navbar = () => {
           })}
         </div>
 
+        {/* CTA Button & Mobile Toggle */}
         <div className="flex items-center gap-4">
           <Link 
             href="https://wa.me/6281234567890" 
@@ -116,6 +118,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <div className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
          <div className="p-6 flex flex-col gap-4">
            {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
@@ -209,6 +212,7 @@ export default function Home() {
 
       {/* 1. HERO SECTION */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        {/* Background Blobs */}
         <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-jeruk-100 rounded-full blur-[100px] opacity-60 translate-x-1/3 -translate-y-1/4 animate-pulse" />
         <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-yellow-100 rounded-full blur-[80px] opacity-50 -translate-x-1/3 translate-y-1/4" />
         
@@ -224,7 +228,7 @@ export default function Home() {
             </h1>
             
             <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
-              Partner kreatif untuk <strong>skala Bisnis</strong> maupun <strong>Perorangan</strong>. Mulai dari manajemen Event (EO) profesional, dokumentasi visual yang estetik, hingga pembuatan website di Yogyakarta.
+              Partner kreatif untuk <strong>skala Bisnis</strong> maupun <strong>Sweet 17 Party</strong>. Mulai dari manajemen Event profesional, dokumentasi visual yang estetik, hingga pembuatan website di Yogyakarta.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -239,6 +243,7 @@ export default function Home() {
             </div>
           </motion.div>
 
+          {/* Hero Visual */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -252,7 +257,7 @@ export default function Home() {
                       <h3 className="font-bold text-xl">Visual</h3>
                       <p className="text-slate-400 text-sm">Dokumentasi & Event</p>
                    </div>
-                   <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Wedding" />
+                   <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1000" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Party" />
                 </div>
                 <div className="space-y-5">
                    <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=600" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Event" />
@@ -272,6 +277,7 @@ export default function Home() {
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-jeruk-50 rounded-full blur-3xl -z-10"></div>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Foto Tim */}
             <div className="relative">
               <div className="absolute inset-0 bg-jeruk-200 rounded-[2.5rem] rotate-3 transform translate-x-2 translate-y-2 -z-10"></div>
               <img 
@@ -292,6 +298,7 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Teks Cerita */}
             <div>
               <span className="text-jeruk-600 font-bold tracking-wider text-sm uppercase mb-2 block">Tentang Kami</span>
               <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
@@ -299,10 +306,10 @@ export default function Home() {
                 <span className="font-serif italic text-jeruk-600">Yang Berkesan.</span>
               </h2>
               <p className="text-slate-600 text-lg leading-relaxed mb-6">
-                Kami percaya momen terbaik tidak terjadi begitu saja, tapi diciptakan. Jerukmanis hadir sebagai partner fleksibel: andal merancang <strong>Event Perusahaan & Publik</strong>, namun tetap hangat dan penuh rasa saat mengabadikan <strong>momen personal</strong> Anda.
+                Kami percaya momen terbaik tidak terjadi begitu saja, tapi diciptakan. Jerukmanis hadir sebagai partner fleksibel: andal merancang <strong>Event Perusahaan</strong> dan <strong>Sweet 17 Party</strong>, serta menyediakan solusi digital dan visual berkualitas tinggi.
               </p>
               <p className="text-slate-600 leading-relaxed mb-8">
-                Kami adalah kolektif Event Planner, Fotografer, dan Developer di Yogyakarta. Apapun tujuannya—meluncurkan produk baru atau merayakan hari pernikahan—kami punya resep yang pas.
+                Kami adalah kolektif Event Planner, Fotografer, dan Developer di Yogyakarta. Apapun tujuannya—merayakan ulang tahun ke-17 atau launching produk perusahaan—kami punya resep yang pas.
               </p>
               <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
                 <div className="flex items-start gap-3">
@@ -336,13 +343,13 @@ export default function Home() {
           {/* Menggunakan Flexbox & Justify Center untuk align tengah */}
           <div className="flex flex-wrap justify-center gap-8">
              
-             {/* Card 1: Event Organizer */}
+             {/* Card 1: Event Organizer (SWEET 17 FOCUS) */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<PartyPopper className="w-8 h-8"/>}
-                  title="Event Organizer"
+                  title="Sweet 17 Specialist"
                   slug="event-organizer"
-                  items={["Corporate Gathering & Outing", "Product Launching & Activation", "Music Concert & Festival", "Professional Live Streaming"]}
+                  items={["Intimate Birthday Dinner", "Grand Sweet 17 Party", "Thematic Decoration (Y2K/Fairy)", "Guest Star & DJ Management"]}
                 />
              </div>
 
@@ -366,13 +373,13 @@ export default function Home() {
                 />
              </div>
 
-             {/* Card 4: Undangan Digital */}
+             {/* Card 4: Undangan Digital Website (NO WEDDING) */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Smartphone className="w-8 h-8"/>}
-                  title="Undangan Digital"
+                  title="Undangan Digital Website"
                   slug="undangan-digital"
-                  items={["Website Invitation (Event/Wedding)", "Video Invitation", "Digital RSVP System"]}
+                  items={["Website Invitation (Birthday)", "Video Invitation", "Digital RSVP System"]}
                 />
              </div>
 
@@ -386,7 +393,7 @@ export default function Home() {
                 />
              </div>
 
-             {/* Card Baru: Professional Live Streaming */}
+             {/* Card 6: Professional Live Streaming */}
             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Monitor className="w-8 h-8"/>} 
@@ -422,14 +429,16 @@ export default function Home() {
                     <h3 className="text-white text-xl font-bold">Annual Corporate Gathering</h3>
                   </div>
               </div>
-              {/* Portfolio Item 2 */}
+              
+              {/* Portfolio Item 2 (UPDATED to Sweet 17) */}
               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Wedding Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+                  <img src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=1000" alt="Party Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Visual Documentation</span>
-                    <h3 className="text-white text-xl font-bold">Intimate Rustic Wedding</h3>
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Sweet 17 Specialist</span>
+                    <h3 className="text-white text-xl font-bold">Euphoria Neon Night Party</h3>
                   </div>
               </div>
+              
                {/* Portfolio Item 3 */}
                <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
                   <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Web Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
@@ -459,7 +468,7 @@ export default function Home() {
                 />
                 <FeatureItem 
                     title="Fleksibel & Personal" 
-                    desc="Baik itu event kantor formal atau pernikahan yang intim, kami menyesuaikan gaya kerja dengan kebutuhan unik Anda." 
+                    desc="Baik itu event kantor formal atau pesta yang intim, kami menyesuaikan gaya kerja dengan kebutuhan unik Anda." 
                 />
               </div>
             </div>

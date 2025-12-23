@@ -19,47 +19,47 @@ type ServiceType = {
   pricing: { name: string; price: string; features: string[]; recommended?: boolean }[];
 };
 
-// --- DATABASE KONTEN LAYANAN (UPDATED: NO WEDDING, MERGED PHOTO/VIDEO) ---
+// --- DATABASE KONTEN LAYANAN ---
 const servicesData: Record<string, ServiceType> = {
   
-  // 1. EVENT ORGANIZER (Disesuaikan untuk Corporate/Umum)
+  // 1. EVENT ORGANIZER (KHUSUS SWEET 17)
   "event-organizer": {
-    title: "Event Organizer",
-    tagline: "Eksekusi Event Profesional & Berkesan",
-    description: "Partner strategis untuk kebutuhan acara perusahaan dan publik. Kami menangani mulai dari konsep kreatif, manajemen panggung, hingga laporan pasca-acara. Fokus kami adalah kelancaran acara dan kepuasan audiens.",
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1600",
+    title: "Specialist 17th Birthday",
+    tagline: "Rayakan Sweet Seventeen Paling Hype & Aesthetic!",
+    description: "Kami adalah spesialis Event Organizer yang fokus mewujudkan pesta Sweet Seventeen impianmu. Mulai dari tema kekinian (Y2K, Fairy, Coquette), dekorasi instagramable, hingga rundown acara yang seru abis dan anti-garing. Bikin momen sekali seumur hidupmu tak terlupakan bareng bestie dan keluarga.",
+    image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     benefits: [
-      { title: "Manajemen End-to-End", desc: "Kami urus vendor, rundown, hingga perizinan. Anda fokus pada tujuan acara." },
-      { title: "Budget Transparan", desc: "RAB detail dan efisien sesuai budget perusahaan/organisasi." },
-      { title: "Tim Profesional", desc: "Crew berpengalaman menangani acara formal maupun festival hiburan." }
+      { title: "Tema Kekinian", desc: "Konsultasi tema hits seperti Euphoria, Neon, atau Garden Party sesuai kepribadianmu." },
+      { title: "MC & DJ Seru", desc: "Pemandu acara dan hiburan yang nyambung sama selera anak muda." },
+      { title: "Konten Ready", desc: "Dekorasi dan lighting dijamin aesthetic buat stok Instastory dan TikTok." }
     ],
-    process: ["Briefing & Brainstorming", "Proposal Konsep & RAB", "Produksi & Persiapan", "Running Event (Hari-H)", "Laporan Event"],
+    process: ["Dream Consultation", "Moodboard & Budgeting", "Persiapan Vendor", "Party Time (Hari-H)", "Kenangan Manis"],
     pricing: [
       {
-        name: "Community / Seminar",
-        price: "Mulai Rp 10 Jt",
-        features: ["Max 100 Pax", "Backdrop & Stage Simple", "Sound System Standard", "1 MC Formal", "Dokumentasi Foto"]
+        name: "Intimate Dinner",
+        price: "Mulai Rp 8 Jt",
+        features: ["Max 30 Pax", "Table Decor Aesthetic", "MC Casual", "Photobooth", "Dokumentasi Foto & Video", "Venue: Cafe/Resto"]
       },
       {
-        name: "Corporate Gathering",
-        price: "Mulai Rp 35 Jt",
-        features: ["Max 300 Pax", "Venue Finding", "Full Entertainment (Band)", "Gala Dinner Setup", "Team Building Games", "Doorprize Management"],
+        name: "Sweet 17 Celebration",
+        price: "Mulai Rp 25 Jt",
+        features: ["Max 100 Pax", "Backdrop 3D & Balloon Art", "MC Duo & DJ/Band", "Birthday Cake Custom", "Cinematic Video Reels", "Doorprize"],
         recommended: true
       },
       {
-        name: "Grand Launching / Festival",
+        name: "Luxury Ballroom",
         price: "Hubungi Kami",
-        features: ["Skala Besar (>500 Pax)", "Rigging & Lighting Show", "Guest Star Nasional", "Multimedia Visual (LED)", "Keamanan & Perizinan Lengkap"]
+        features: ["200+ Pax", "Grand Entrance Concept", "Lighting Show & Rigging", "Artis/Influencer Guest", "MUA & Gown Rental", "Full Organizer Team"]
       }
     ]
   },
 
-  // 2. VISUAL DOCUMENTATION (GABUNGAN FOTO & VIDEO)
+  // 2. VISUAL DOCUMENTATION (GABUNGAN FOTO & VIDEO - NON WEDDING)
   "visual-documentation": {
     title: "Visual Documentation",
     tagline: "Foto & Video Profesional untuk Bisnis",
     description: "Solusi satu pintu untuk kebutuhan visual Anda. Kami menggabungkan fotografi tajam dan videografi sinematik untuk mendokumentasikan event, membuat profil perusahaan, atau iklan produk komersial.",
-    image: "https://images.unsplash.com/photo-1764924777528-81dea357af97?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     benefits: [
       { title: "Hybrid Team", desc: "Satu tim solid menangani foto dan video sekaligus agar hasil senada." },
       { title: "Commercial Standard", desc: "Menggunakan peralatan standar industri (4K Video, High-Res Photo)." },
@@ -86,7 +86,7 @@ const servicesData: Record<string, ServiceType> = {
     ]
   },
 
-  // 3. CREATIVE BRANDING (No Change)
+  // 3. CREATIVE BRANDING
   "creative-branding": {
     title: "Creative Branding",
     tagline: "Identitas Visual yang Beda & Berkarakter",
@@ -118,9 +118,9 @@ const servicesData: Record<string, ServiceType> = {
     ]
   },
 
-  // 4. UNDANGAN DIGITAL (Rebranded to Corporate/Event)
+  // 4. UNDANGAN DIGITAL (Updated Title)
   "undangan-digital": {
-    title: "Undangan Digital",
+    title: "Undangan Digital Website",
     tagline: "Undangan Event Modern & Paperless",
     description: "Solusi undangan digital berbasis website untuk Grand Opening, Seminar, Gala Dinner, atau Ulang Tahun Perusahaan. Tampil profesional, hemat biaya, dan mudah disebarkan via WhatsApp.",
     image: "https://plus.unsplash.com/premium_photo-1682310479841-a3def42359c6?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -150,7 +150,7 @@ const servicesData: Record<string, ServiceType> = {
     ]
   },
 
-  // 5. SOFTWARE & WEB (No Change)
+  // 5. SOFTWARE & WEB
   "software-web": {
     title: "Software & Web",
     tagline: "Digitalisasi Bisnis dengan Teknologi Modern",
@@ -182,6 +182,7 @@ const servicesData: Record<string, ServiceType> = {
     ]
   },
 
+  // 6. LIVE STREAMING
   "professional-live-streaming": {
     title: "Professional Live Streaming",
     tagline: "Jangkau Audiens Lebih Luas Secara Real-Time",
