@@ -154,16 +154,25 @@ const Footer = () => (
       <div>
         <h4 className="font-bold text-lg mb-6 text-jeruk-100">Hubungi Kami</h4>
         <ul className="space-y-4 text-slate-300 text-sm">
-          <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
-            <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Phone className="w-4 h-4 text-jeruk-500"/></span> 
-            +62 812-xxxx-xxxx
+          {/* Phone Link */}
+          <li>
+            <Link href="https://wa.me/6281234567890" target="_blank" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
+              <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Phone className="w-4 h-4 text-jeruk-500"/></span> 
+              +62 812-xxxx-xxxx
+            </Link>
           </li>
-          <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
-            <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Mail className="w-4 h-4 text-jeruk-500"/></span> 
-            hello@jerukmanis.web.id
+          
+          {/* Email Link (UPDATED) */}
+          <li>
+            <Link href="mailto:hello@jerukmanis.web.id" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
+              <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Mail className="w-4 h-4 text-jeruk-500"/></span> 
+              hello@jerukmanis.web.id
+            </Link>
           </li>
-          <li className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
-            <Link href="https://instagram.com/jerukmanis.creative" target="_blank" className="flex items-center gap-3">
+          
+          {/* Instagram Link */}
+          <li>
+            <Link href="https://instagram.com/jerukmanis.creative" target="_blank" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Instagram className="w-4 h-4 text-jeruk-500"/></span> 
               @jerukmanis.creative
             </Link>
