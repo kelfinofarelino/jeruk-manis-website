@@ -441,7 +441,7 @@ export default function Home() {
               
               {/* Portfolio Item 2 (UPDATED to Sweet 17) */}
               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <img src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=1000" alt="Party Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+                  <img src="https://plus.unsplash.com/premium_photo-1742444926373-db6c4e4a18fe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bmVvbiUyMG5pZ2h0JTIwcGFydHl8ZW58MHx8MHx8fDA%3D" alt="Party Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
                     <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Sweet 17 Specialist</span>
                     <h3 className="text-white text-xl font-bold">Euphoria Neon Night Party</h3>
