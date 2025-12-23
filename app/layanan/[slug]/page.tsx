@@ -145,20 +145,20 @@ const servicesData: Record<string, ServiceType> = {
     process: ["Pilih Layout/Tema", "Input Data Acara", "Preview", "Revisi", "Publish Link"],
     pricing: [
       {
-        name: "Video Invitation",
-        price: "Rp 250.000",
-        features: ["Format MP4 (Vertical)", "Durasi 30-60 Detik", "Motion Graphic", "Musik Latar", "Revisi 1x"]
+        name: "Simple Link",
+        price: "Mulai Rp 350.000",
+        features: ["1 Halaman Website Responsif (desain template pilihan)", "Form RSVP & Guestbook Sederhana", "Countdown Timer ke hari acara", "Peta Lokasi (Google Maps embed)", "Galeri Foto (maks. 5 foto)", "Cocok untuk: Acara santai, tunangan sederhana, atau syukuran kecil."]
       },
       {
-        name: "Web Event Basic",
-        price: "Rp 350.000",
-        features: ["Template Corporate", "Info Acara & Rundown", "Peta Lokasi", "Form RSVP Sederhana", "Countdown Timer"],
+        name: "The Digital Card",
+        price: "Mulai Rp 750.000",
+        features: ["Multi-page Website (Cover, Couple Story, Event Info, Gallery, RSVP)", "Desain Custom sesuai tema/warna acara (mood board)", "RSVP & Guestbook Management + notifikasi WhatsApp/Email ke Anda", "Countdown Timer & Music Player (1 lagu pilihan)", "Galeri Foto (maks. 15 foto) & Video Highlight Embed (YouTube link)", "Hosting & Domain Subdomain premium", "Cocok untuk: Pernikahan, Sweet 17, dan acara formal."],
         recommended: true
       },
       {
-        name: "Web Event Custom",
-        price: "Rp 900.000",
-        features: ["Desain Custom Sesuai Brand", "Nama Tamu di Cover (Personalized)", "QR Code Check-in System", "Galeri Foto/Video", "Domain .com (1 Tahun)"]
+        name: "The Experience",
+        price: "Mulai Rp 1.800.000",
+        features: ["Semua fitur Paket Standard +", "Desain Full Custom & Animasi Elegan (sesuai konsep acara Anda)", "RSVP Advanced dengan konfirmasi makanan, kursi, dan shuttle", "Live Guestbook Wall (tampilan pesan tamu langsung di website)", "Custom Domain (contoh: www.nikah-anda.com, gratis 1 tahun)", "Video Invitation Teaser (1-2 menit, untuk undangan via sosial media)", "Cocok untuk: Acara besar, pernikahan premium, atau corporate event yang membutuhkan manajemen tamu profesional."]
       }
     ]
   },
