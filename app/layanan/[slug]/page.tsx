@@ -5,7 +5,7 @@ import Link from "next/link";
 import Lenis from "lenis"; 
 import { 
   ArrowLeft, CheckCircle2, Phone, Mail, 
-  BadgeCheck, Clock 
+  BadgeCheck, Clock, Plus // Import icon Plus
 } from "lucide-react";
 
 // --- TYPE DEFINITION ---
@@ -17,6 +17,7 @@ type ServiceType = {
   benefits: { title: string; desc: string }[];
   process: string[];
   pricing: { name: string; price: string; features: string[]; recommended?: boolean }[];
+  addons?: { title: string; price: string }[]; // New Type untuk Add-ons
 };
 
 // --- DATABASE KONTEN LAYANAN ---
@@ -27,7 +28,7 @@ const servicesData: Record<string, ServiceType> = {
     title: "Specialist 17th Birthday",
     tagline: "Rayakan Sweet Seventeen Paling Hype & Aesthetic!",
     description: "Kami adalah spesialis Event Organizer yang fokus mewujudkan pesta Sweet Seventeen impianmu. Mulai dari tema kekinian (Y2K, Fairy, Coquette), dekorasi instagramable, hingga rundown acara yang seru abis dan anti-garing. Bikin momen sekali seumur hidupmu tak terlupakan bareng bestie dan keluarga.",
-    image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1170&auto=format&fit=crop",
     benefits: [
       { title: "Tema Kekinian", desc: "Konsultasi tema hits seperti Euphoria, Neon, atau Garden Party sesuai kepribadianmu." },
       { title: "MC & DJ Seru", desc: "Pemandu acara dan hiburan yang nyambung sama selera anak muda." },
@@ -37,29 +38,36 @@ const servicesData: Record<string, ServiceType> = {
     pricing: [
       {
         name: "Intimate Dinner",
-        price: "Mulai Rp 8 Jt",
-        features: ["Max 30 Pax", "Table Decor Aesthetic", "MC Casual", "Photobooth", "Dokumentasi Foto & Video", "Venue: Cafe/Resto"]
+        price: "Mulai Rp 15 Jt",
+        features: ["Max 50 Pax", "Simple Decor Aesthetic", "MC Casual", "Mini Sound System", "Dokumentasi Foto & Video", "Venue: Rumah, Villa, Cafe/Resto"]
       },
       {
-        name: "Sweet 17 Celebration",
+        name: "Sweet Celebration",
         price: "Mulai Rp 25 Jt",
-        features: ["Max 100 Pax", "Backdrop 3D & Balloon Art", "MC Duo & DJ/Band", "Birthday Cake Custom", "Cinematic Video Reels", "Doorprize"],
+        features: ["Max 60 Pax", "Advance decor Aesthetic", "MC & DJ/Band", "Birthday Cake Custom", "Dokumentasi Foto & Video", "Venue: Balroom Kecil, Outdoor Garden, Cafe/Resto"],
         recommended: true
       },
       {
         name: "Luxury Ballroom",
         price: "Hubungi Kami",
-        features: ["200+ Pax", "Grand Entrance Concept", "Lighting Show & Rigging", "Artis/Influencer Guest", "MUA & Gown Rental", "Full Organizer Team"]
+        features: ["100+ Pax", "Grand Entrance Concept", "Lighting Show & Rigging", "Artis/Influencer Guest", "Full Organizer Team", "Venue: Hotel Ballroom, Outdoor Premium"]
       }
+    ],
+    // --- ADD ONS KHUSUS ---
+    addons: [
+      { title: "Photobooth", price: "Rp 2.500.000" },
+      { title: "MUA & Hairdo", price: "Rp 1.500.000" },
+      { title: "360 Video Booth", price: "Rp 2.000.000" },
+      { title: "Live Music Akustik", price: "Rp 3 - 7 Juta" }
     ]
   },
 
-  // 2. VISUAL DOCUMENTATION (GABUNGAN FOTO & VIDEO - NON WEDDING)
+  // 2. VISUAL DOCUMENTATION
   "visual-documentation": {
     title: "Visual Documentation",
     tagline: "Foto & Video Profesional untuk Bisnis",
     description: "Solusi satu pintu untuk kebutuhan visual Anda. Kami menggabungkan fotografi tajam dan videografi sinematik untuk mendokumentasikan event, membuat profil perusahaan, atau iklan produk komersial.",
-    image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=1170&auto=format&fit=crop",
     benefits: [
       { title: "Hybrid Team", desc: "Satu tim solid menangani foto dan video sekaligus agar hasil senada." },
       { title: "Commercial Standard", desc: "Menggunakan peralatan standar industri (4K Video, High-Res Photo)." },
@@ -83,6 +91,11 @@ const servicesData: Record<string, ServiceType> = {
         price: "Mulai Rp 8.500.000",
         features: ["Konsep Naskah & Storyboard", "Shooting 1-2 Hari", "Interview Direksi/Staff", "Drone Aerial Shot", "Voice Over & Grafis"]
       }
+    ],
+    addons: [
+      { title: "Drone / Aerial Shot", price: "Rp 1.500.000" },
+      { title: "Raw Files (All Footage)", price: "Rp 1.000.000" },
+      { title: "Extra Photographer", price: "Rp 1.500.000" }
     ]
   },
 
@@ -118,12 +131,12 @@ const servicesData: Record<string, ServiceType> = {
     ]
   },
 
-  // 4. UNDANGAN DIGITAL (Updated Title)
+  // 4. UNDANGAN DIGITAL
   "undangan-digital": {
     title: "Undangan Digital Website",
     tagline: "Undangan Event Modern & Paperless",
     description: "Solusi undangan digital berbasis website untuk Grand Opening, Seminar, Gala Dinner, atau Ulang Tahun Perusahaan. Tampil profesional, hemat biaya, dan mudah disebarkan via WhatsApp.",
-    image: "https://plus.unsplash.com/premium_photo-1682310479841-a3def42359c6?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://plus.unsplash.com/premium_photo-1682310479841-a3def42359c6?q=80&w=1212&auto=format&fit=crop",
     benefits: [
       { title: "Database Tamu", desc: "Fitur RSVP memudahkan pendataan jumlah tamu yang akan hadir." },
       { title: "Profesional", desc: "Desain elegan menyesuaikan corporate identity perusahaan." },
@@ -187,7 +200,7 @@ const servicesData: Record<string, ServiceType> = {
     title: "Professional Live Streaming",
     tagline: "Jangkau Audiens Lebih Luas Secara Real-Time",
     description: "Layanan siaran langsung (broadcasting) profesional untuk menjembatani event offline Anda dengan audiens online. Kami menggunakan standar broadcast televisi dengan mixing visual yang dinamis, audio jernih, dan koneksi stabil untuk Webinar, Talkshow, Wisuda, hingga Konser Musik.",
-    image: "https://images.unsplash.com/photo-1594394489098-74ac04c0fc2e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1594394489098-74ac04c0fc2e?q=80&w=1170&auto=format&fit=crop",
     benefits: [
       { title: "Multi-Platform", desc: "Bisa live stream ke YouTube, Zoom, Instagram, dan Facebook secara bersamaan." },
       { title: "Broadcast Quality", desc: "Tampilan profesional dengan fitur Lower Third (Nama), Logo, dan Transisi mulus." },
@@ -331,11 +344,11 @@ export default function ServiceDetail({ params }: { params: Promise<{ slug: stri
                 <p className="text-slate-500">Transparan, fleksibel, dan sesuai kebutuhan Anda.</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 items-start">
+            <div className="grid md:grid-cols-3 gap-8 items-start mb-16">
                 {data.pricing.map((pkg, idx) => (
                     <div 
                         key={idx} 
-                        className={`relative p-8 rounded-[2.5rem] border transition-all duration-300 ${
+                        className={`relative p-8 rounded-[2.5rem] border transition-all duration-300 flex flex-col h-full ${
                             pkg.recommended 
                             ? "bg-white border-jeruk-500 shadow-2xl shadow-jeruk-500/10 scale-105 z-10" 
                             : "bg-slate-50 border-slate-100 hover:bg-white hover:shadow-xl hover:-translate-y-1"
@@ -349,7 +362,7 @@ export default function ServiceDetail({ params }: { params: Promise<{ slug: stri
                         <h3 className="text-xl font-bold text-slate-900 mb-2">{pkg.name}</h3>
                         <p className="text-3xl font-extrabold text-jeruk-600 mb-8">{pkg.price}</p>
                         
-                        <ul className="space-y-4 mb-8">
+                        <ul className="space-y-4 mb-8 flex-grow">
                             {pkg.features.map((feat, fIdx) => (
                                 <li key={fIdx} className="flex items-start gap-3 text-sm text-slate-600">
                                     <CheckCircle2 className="w-5 h-5 text-jeruk-500 flex-shrink-0" />
@@ -372,6 +385,34 @@ export default function ServiceDetail({ params }: { params: Promise<{ slug: stri
                     </div>
                 ))}
             </div>
+
+            {/* --- ADD ONS SECTION (BARU) --- */}
+            {data.addons && (
+              <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-lg">
+                  <div className="text-center mb-10">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2">Tambahan (Add-ons)</h3>
+                    <p className="text-slate-500">Lengkapi paket pilihanmu dengan item tambahan ini.</p>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                      {data.addons.map((addon, idx) => (
+                          <div key={idx} className="flex items-center justify-between p-5 bg-slate-50 rounded-2xl hover:bg-white hover:shadow-md hover:border-jeruk-200 border border-transparent transition-all duration-300 group">
+                              <div className="flex items-center gap-4">
+                                  <div className="w-10 h-10 rounded-full bg-jeruk-100 flex items-center justify-center text-jeruk-600 group-hover:bg-jeruk-600 group-hover:text-white transition-colors">
+                                      <Plus className="w-5 h-5" />
+                                  </div>
+                                  <span className="font-bold text-slate-700 group-hover:text-slate-900 transition-colors">
+                                    {addon.title}
+                                  </span>
+                              </div>
+                              <div className="text-right">
+                                  <span className="block font-bold text-jeruk-600">{addon.price}</span>
+                              </div>
+                          </div>
+                      ))}
+                  </div>
+              </div>
+            )}
         </div>
 
         {/* 4. CTA BANNER */}

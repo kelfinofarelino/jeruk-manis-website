@@ -8,7 +8,8 @@ import {
   ArrowRight, Play, Camera, Monitor, 
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
   Palette, PartyPopper, Code2, Users, Trophy, Target, 
-  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone 
+  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone,
+  ChevronDown
 } from "lucide-react";
 
 // --- DATA TESTIMONI (UPDATED: NO WEDDING) ---
@@ -45,6 +46,16 @@ const testimonialsData = [
   }
 ];
 
+// --- LIST LAYANAN UNTUK DROPDOWN ---
+const servicesList = [
+  { title: "Sweet 17 Specialist", slug: "event-organizer" },
+  { title: "Visual Documentation", slug: "visual-documentation" },
+  { title: "Creative Branding", slug: "creative-branding" },
+  { title: "Undangan Digital Website", slug: "undangan-digital" },
+  { title: "Software & Web", slug: "software-web" },
+  { title: "Pro Live Streaming", slug: "professional-live-streaming" },
+];
+
 // --- KOMPONEN NAVBAR ---
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +69,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>, id: string) => {
     e.preventDefault();
     setIsOpen(false);
     const element = document.getElementById(id);
@@ -87,10 +98,41 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Menu Desktop */}
-        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+        {/* Menu Desktop (UPDATED WITH DROPDOWN) */}
+        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600 items-center">
           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
             const id = item.toLowerCase().replace(" ", "-");
+
+            // LOGIC KHUSUS UNTUK MENU "LAYANAN" (DROPDOWN)
+            if (item === "Layanan") {
+              return (
+                <div key={item} className="relative group h-full">
+                  <button 
+                    onClick={(e) => handleScrollTo(e, id)}
+                    className="flex items-center gap-1 hover:text-jeruk-600 transition-colors py-2 cursor-pointer"
+                  >
+                    {item} <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300"/>
+                  </button>
+                  
+                  {/* Dropdown Content */}
+                  <div className="absolute top-full -left-12 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 w-64">
+                    <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 overflow-hidden flex flex-col gap-1">
+                      {servicesList.map((service, idx) => (
+                        <Link 
+                          key={idx}
+                          href={`/layanan/${service.slug}`}
+                          className="block px-4 py-3 text-sm text-slate-600 hover:text-jeruk-600 hover:bg-jeruk-50 rounded-xl transition-all font-medium text-left"
+                        >
+                          {service.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            // LOGIC MENU BIASA (SCROLL)
             return (
               <a 
                 key={item} 
@@ -162,7 +204,7 @@ const Footer = () => (
             </Link>
           </li>
           
-          {/* Email Link (UPDATED) */}
+          {/* Email Link */}
           <li>
             <Link href="mailto:hello@jerukmanis.web.id" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Mail className="w-4 h-4 text-jeruk-500"/></span> 
@@ -245,10 +287,17 @@ export default function Home() {
                 Konsultasi Gratis
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <button className="flex items-center justify-center gap-3 px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-lg hover:border-jeruk-300 hover:bg-jeruk-50 transition-all">
+              <a 
+                href="#portofolio" // Mengarah ke section Portofolio di bawah
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('portofolio')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-lg hover:border-jeruk-300 hover:bg-jeruk-50 transition-all cursor-pointer"
+              >
                 <Play className="w-5 h-5 fill-slate-700" />
-                Lihat Showreel
-              </button>
+                Lihat Karya
+              </a>
             </div>
           </motion.div>
 
