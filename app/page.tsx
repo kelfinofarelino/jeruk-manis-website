@@ -595,7 +595,7 @@ export default function Home() {
 }
 
 const ServiceCard = ({ icon, title, items, slug }: { icon: any, title: string, items: string[], slug: string }) => (
-  <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col h-full">
+ <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group flex flex-col h-full">
     <div className="w-14 h-14 bg-jeruk-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-jeruk-500 transition-colors duration-300 flex-shrink-0">
       <div className="text-jeruk-600 group-hover:text-white transition-colors duration-300">
         {icon}
