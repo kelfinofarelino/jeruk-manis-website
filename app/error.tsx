@@ -1,4 +1,3 @@
-// app/error.tsx
 'use client'
 
 import { useEffect } from 'react'
@@ -18,7 +17,7 @@ export default function Error({
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-950 px-4 text-center bg-grid-pattern relative overflow-hidden">
         
-      {/* Background blob untuk kesan dramatis */}
+      {/* Background blob */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/10 rounded-full filter blur-3xl -z-10"></div>
 
       {/* Ikon Warning Berdenyut */}
@@ -37,7 +36,7 @@ export default function Error({
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4">
-        {/* Tombol Coba Lagi - Lebih menonjol */}
+        {/* Tombol Coba Lagi */}
         <button
           onClick={() => reset()}
           className="px-8 py-4 text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-500/30 font-bold active:scale-95"
@@ -45,7 +44,7 @@ export default function Error({
           Coba Muat Ulang ↻
         </button>
 
-        {/* Tombol Pulang - Lebih subtle */}
+        {/* Tombol Pulang */}
         <a 
             href="/" 
             className="px-8 py-4 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all hover:-translate-y-1 font-semibold active:scale-95"

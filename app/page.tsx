@@ -12,7 +12,6 @@ import {
   ChevronDown
 } from "lucide-react";
 
-// --- DATA TESTIMONI (UPDATED: NO WEDDING) ---
 const testimonialsData = [
   {
     name: "Clarissa Putri",
@@ -46,7 +45,7 @@ const testimonialsData = [
   }
 ];
 
-// --- LIST LAYANAN UNTUK DROPDOWN ---
+// --- LIST LAYANAN DROPDOWN ---
 const servicesList = [
   { title: "Sweet 17 Specialist", slug: "event-organizer" },
   { title: "Visual Documentation", slug: "visual-documentation" },
@@ -98,12 +97,11 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Menu Desktop (UPDATED WITH DROPDOWN) */}
+        {/* Menu Desktop */}
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-600 items-center">
           {["Tentang", "Layanan", "Portofolio", "Cara Kerja"].map((item) => {
             const id = item.toLowerCase().replace(" ", "-");
 
-            // LOGIC KHUSUS UNTUK MENU "LAYANAN" (DROPDOWN)
             if (item === "Layanan") {
               return (
                 <div key={item} className="relative group h-full">
@@ -114,7 +112,6 @@ const Navbar = () => {
                     {item} <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300"/>
                   </button>
                   
-                  {/* Dropdown Content */}
                   <div className="absolute top-full -left-12 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 w-64">
                     <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 overflow-hidden flex flex-col gap-1">
                       {servicesList.map((service, idx) => (
@@ -132,7 +129,6 @@ const Navbar = () => {
               );
             }
 
-            // LOGIC MENU BIASA (SCROLL)
             return (
               <a 
                 key={item} 
@@ -196,7 +192,6 @@ const Footer = () => (
       <div>
         <h4 className="font-bold text-lg mb-6 text-jeruk-100">Hubungi Kami</h4>
         <ul className="space-y-4 text-slate-300 text-sm">
-          {/* Phone Link */}
           <li>
             <Link href="https://wa.me/6281234567890" target="_blank" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Phone className="w-4 h-4 text-jeruk-500"/></span> 
@@ -204,7 +199,6 @@ const Footer = () => (
             </Link>
           </li>
           
-          {/* Email Link */}
           <li>
             <Link href="mailto:hello@jerukmanis.web.id" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Mail className="w-4 h-4 text-jeruk-500"/></span> 
@@ -212,7 +206,6 @@ const Footer = () => (
             </Link>
           </li>
           
-          {/* Instagram Link */}
           <li>
             <Link href="https://instagram.com/jerukmanis.creative" target="_blank" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Instagram className="w-4 h-4 text-jeruk-500"/></span> 
@@ -247,7 +240,6 @@ export default function Home() {
     <main className="min-h-screen bg-white selection:bg-jeruk-200 selection:text-jeruk-900 font-sans">
       <Navbar />
       
-      {/* GLOBAL CSS */}
       <style jsx global>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -263,7 +255,6 @@ export default function Home() {
 
       {/* 1. HERO SECTION */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        {/* Background Blobs */}
         <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-jeruk-100 rounded-full blur-[100px] opacity-60 translate-x-1/3 -translate-y-1/4 animate-pulse" />
         <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-yellow-100 rounded-full blur-[80px] opacity-50 -translate-x-1/3 translate-y-1/4" />
         
@@ -288,7 +279,7 @@ export default function Home() {
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a 
-                href="#portofolio" // Mengarah ke section Portofolio di bawah
+                href="#portofolio"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('portofolio')?.scrollIntoView({ behavior: 'smooth' });
@@ -390,7 +381,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. LAYANAN SECTION (FLEX LAYOUT - CENTER ALIGNMENT) */}
+      {/* 3. LAYANAN SECTION */}
       <section id="layanan" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -398,7 +389,6 @@ export default function Home() {
             <p className="text-slate-600 max-w-2xl mx-auto">Solusi lengkap untuk kebutuhan Acara, Visual, dan Digital Anda.</p>
           </div>
 
-          {/* Menggunakan Flexbox & Justify Center untuk align tengah */}
           <div className="flex flex-wrap justify-center gap-8">
              
              {/* Card 1: Event Organizer (SWEET 17 FOCUS) */}
@@ -604,7 +594,6 @@ export default function Home() {
   );
 }
 
-// --- SUB-KOMPONEN KECIL ---
 
 const ServiceCard = ({ icon, title, items, slug }: { icon: any, title: string, items: string[], slug: string }) => (
   <div className="p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col h-full">

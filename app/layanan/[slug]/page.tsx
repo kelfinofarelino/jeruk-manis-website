@@ -5,7 +5,7 @@ import Link from "next/link";
 import Lenis from "lenis"; 
 import { 
   ArrowLeft, CheckCircle2, Phone, Mail, 
-  BadgeCheck, Clock, Plus // Import icon Plus
+  BadgeCheck, Clock, Plus
 } from "lucide-react";
 
 // --- TYPE DEFINITION ---
@@ -53,7 +53,6 @@ const servicesData: Record<string, ServiceType> = {
         features: ["100+ Pax", "Grand Entrance Concept", "Lighting Show & Rigging", "Artis/Influencer Guest", "Full Organizer Team", "Venue: Hotel Ballroom, Outdoor Premium"]
       }
     ],
-    // --- ADD ONS KHUSUS ---
     addons: [
       { title: "Photobooth", price: "Rp 2.500.000" },
       { title: "MUA & Hairdo", price: "Rp 1.500.000" },
@@ -386,7 +385,7 @@ export default function ServiceDetail({ params }: { params: Promise<{ slug: stri
                 ))}
             </div>
 
-            {/* --- ADD ONS SECTION (BARU) --- */}
+            {/* --- ADD ONS SECTION --- */}
             {data.addons && (
               <div className="max-w-5xl mx-auto bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-lg">
                   <div className="text-center mb-10">

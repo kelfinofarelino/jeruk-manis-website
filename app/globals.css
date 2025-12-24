@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hapus bagian @layer dan @apply yang tadi error */
 body {
   background-color: white;
   color: #0f172a;
@@ -10,55 +9,46 @@ body {
 
 /* Kustomisasi Scrollbar untuk Chrome, Safari, dan Edge */
 @layer utilities {
-  /* Lebar scrollbar */
   ::-webkit-scrollbar {
-    width: 10px; /* Lebar untuk vertical scroll */
-    height: 10px; /* Tinggi untuk horizontal scroll */
+    width: 10px;
+    height: 10px;
   }
 
-  /* Track (Jalur lintasan scrollbar - backgroundnya) */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Bisa diganti transparan atau warna lain */
+    background: transparent;
     border-radius: 5px;
   }
 
-  /* Handle (Bagian yang bergerak/digeser) - INI YANG ORANYE */
   ::-webkit-scrollbar-thumb {
-    background: #f97316; /* Ini kode warna oranye (Tailwind Orange-500) */
+    background: #f97316;
     border-radius: 5px;
   }
 
-  /* Efek saat di-hover (opsional, biar makin interaktif) */
   ::-webkit-scrollbar-thumb:hover {
-    background: #ea580c; /* Oranye lebih gelap (Orange-600) */
+    background: #ea580c;
   }
 
   @keyframes shake-head {
     0%, 100% { transform: rotate(0deg); }
-    20% { transform: rotate(-8deg); } /* Geleng kiri */
-    40% { transform: rotate(8deg); }  /* Geleng kanan */
-    60% { transform: rotate(-4deg); } /* Kiri dikit */
-    80% { transform: rotate(4deg); }  /* Kanan dikit */
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(8deg); }
+    60% { transform: rotate(-4deg); }
+    80% { transform: rotate(4deg); }
   }
 
   .animate-shake-head {
-    /* Durasi 2 detik, diulang terus, titik putar di bawah */
     animation: shake-head 2s ease-in-out infinite;
     transform-origin: bottom center;
-    display: inline-block; /* Penting agar transform-origin berfungsi */
+    display: inline-block;
   }
 }
 
-/* Kustomisasi Scrollbar untuk Firefox (Syntax beda sendiri) */
 * {
-  scrollbar-width: thin; /* Pilihan: auto, thin, none */
-  scrollbar-color: #f97316 #f1f1f1; /* thumb color | track color */
+  scrollbar-width: thin;
+  scrollbar-color: #f97316 #f1f1f1;
 }
 
-/* globals.css */
-
 @layer utilities {
-  /* Animasi Mengambang Pelan */
   @keyframes float-slow {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
@@ -67,7 +57,6 @@ body {
     animation: float-slow 6s ease-in-out infinite;
   }
 
-  /* Animasi Berdenyut untuk Ikon Error */
   @keyframes pulse-orange {
     0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
     70% { box-shadow: 0 0 0 20px rgba(249, 115, 22, 0); }
@@ -76,7 +65,6 @@ body {
     animation: pulse-orange 2s infinite;
   }
   
-  /* Background Grid Pattern Halus */
   .bg-grid-pattern {
       background-image: radial-gradient(rgba(249, 115, 22, 0.1) 1px, transparent 1px);
       background-size: 20px 20px;
