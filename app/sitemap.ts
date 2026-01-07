@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://jerukmanis.web.id' // Ganti domain aslimu
+  const baseUrl = 'https://jerukmanis.web.id'
 
   return [
     {
