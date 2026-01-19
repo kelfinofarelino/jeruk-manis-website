@@ -5,7 +5,8 @@ import Link from "next/link";
 import Lenis from "lenis";
 import { 
   ArrowLeft, CheckCircle2, Phone, 
-  BadgeCheck, Plus, ChevronDown, Menu, X, Clock
+  BadgeCheck, Plus, ChevronDown, Menu, X, Clock,
+  Mail, Instagram
 } from "lucide-react";
 
 // --- DATA TYPES ---
@@ -80,8 +81,7 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
                     <ArrowLeft className="w-5 h-5" />
                 </Link>
 
-                  <Link href="/" className="flex items-center gap-2 group">
-                  {/* --- BAGIAN LOGO DIGANTI DISINI --- */}
+                <Link href="/" className="flex items-center gap-2 group">
                   <img 
                     src="/images/logo.png" 
                     alt="Logo Jerukmanis" 
@@ -236,17 +236,14 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
             </div>
         </section>
 
-        {/* --- PRICING SECTION & ADD ONS --- */}
+        {/* --- PRICING SECTION --- */}
         <section className="py-20 bg-slate-50">
             <div className="container mx-auto px-6 max-w-6xl mb-20">
-                
-                {/* 1. SECTION HEADER: PILIHAN PAKET */}
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold text-slate-900 mb-4">Pilihan Paket</h2>
                     <p className="text-slate-500">Transparan, fleksibel, dan sesuai kebutuhan Anda.</p>
                 </div>
 
-                {/* 2. PRICING CARDS */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
                     {data.pricing.map((pkg, idx) => (
                         <div 
@@ -268,7 +265,6 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
                             <Link 
                                 href={`https://wa.me/6281234567890?text=Halo%20Jerukmanis,%20saya%20mau%20ambil%20paket%20${pkg.name}%20untuk%20layanan%20${data.title}`}
                                 target="_blank"
-                                // TOMBOL PILIH PAKET [UPDATED]: bg-white, border-slate-200, text-slate-900
                                 className="flex items-center justify-center w-full py-4 rounded-xl font-bold transition-all bg-white border border-slate-200 text-slate-900 hover:border-orange-500 hover:text-orange-600 hover:shadow-md"
                             >
                                 Pilih Paket
@@ -277,18 +273,17 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
                     ))}
                 </div>
 
-                {/* 3. ADD-ONS SECTION (Compact & Rapi) */}
+                {/* ADD-ONS SECTION */}
                 {data.addons && (
                     <div className="max-w-4xl mx-auto text-center">
                         <h2 className="text-3xl font-bold text-slate-900 mb-6">Tambahan (Add-ons)</h2>
-                        <p className="text-center text-slate-500 text-sm mb-10">Lengkapi paket pilihanmu dengan item tambahan ini.</p>
+                        <p className="text-center text-slate-400 text-sm mb-10">Lengkapi paket pilihanmu dengan item tambahan ini.</p>
                         
                         <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8">
                             <div className="grid md:grid-cols-2 gap-4">
                                 {data.addons.map((addon, idx) => (
                                     <div 
                                         key={idx} 
-                                        // Padding 5, Font Base (Lebih Compact & Enak Dilihat)
                                         className="group flex justify-between items-center p-5 bg-white border-2 border-slate-50 rounded-3xl transition-all duration-300 hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/10 cursor-default"
                                     >
                                         <div className="flex items-center gap-4">
@@ -307,21 +302,74 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
             </div>
         </section>
 
-        {/* --- CTA SECTION --- */}
-        <section className="py-20 bg-slate-900 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-            <div className="container mx-auto px-6 text-center relative z-10">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Punya kebutuhan khusus?</h2>
-                <p className="text-slate-400 mb-10 text-lg max-w-2xl mx-auto">
-                    Jika paket di atas belum sesuai, kami siap membuatkan penawaran custom (Custom Quotation) sesuai budget dan keinginan Anda.
-                </p>
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <Link href="https://wa.me/6281234567890" className="flex items-center justify-center gap-2 px-8 py-4 bg-orange-600 text-white rounded-full font-bold text-lg hover:bg-orange-500 hover:scale-105 transition-all shadow-xl shadow-orange-500/20">
-                        <Phone className="w-5 h-5" /> Konsultasi Custom
-                    </Link>
+        {/* --- CTA SECTION (NEW: Card Dark Mode Style) --- */}
+        <section className="py-24">
+             <div className="max-w-5xl mx-auto px-6">
+                <div className="bg-slate-900 rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden group shadow-2xl">
+                   {/* Background Glow Effect */}
+                   <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500 rounded-full blur-[100px] opacity-30 translate-x-1/2 -translate-y-1/2 group-hover:opacity-40 transition-opacity"></div>
+                   <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600 rounded-full blur-[80px] opacity-20 -translate-x-1/2 translate-y-1/2"></div>
+                   
+                   {/* Content */}
+                   <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 relative z-10 leading-tight">
+                     Pengen punya momen<br/> <span className="text-orange-500 font-serif italic">yang lebih Manis?</span>
+                   </h2>
+                   <p className="text-slate-400 mb-10 text-lg max-w-xl mx-auto relative z-10">
+                     Jika paket di atas belum sesuai, kami siap membuatkan penawaran custom. sesuai budget dan keinginan Anda.
+                   </p>
+                   <Link 
+                    href="https://wa.me/6281234567890"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-orange-600 text-white rounded-full font-bold text-lg hover:bg-orange-500 hover:scale-105 transition-all shadow-lg shadow-orange-500/25 relative z-10"
+                   >
+                      <Phone className="w-5 h-5" />
+                      Hubungi via WhatsApp
+                   </Link>
                 </div>
-            </div>
+             </div>
         </section>
+
+        {/* --- FOOTER SECTION (NEW) --- */}
+        <footer className="bg-slate-950 text-white py-16 border-t-4 border-orange-500">
+            <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+              <div className="space-y-4">
+                <h3 className="text-3xl font-bold">jeruk<span className="text-orange-500 font-serif italic">manis</span>.</h3>
+                <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
+                  Partner kreatif terpercaya di <strong>DI Yogyakarta</strong>. 
+                  Spesialis Event Organizer, Dokumentasi Visual, dan Pengembangan Web untuk Bisnis & Momen Personal Anda.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold text-lg mb-6 text-orange-100">Hubungi Kami</h4>
+                <ul className="space-y-4 text-slate-300 text-sm">
+                  <li>
+                    <Link href="https://wa.me/6281234567890" target="_blank" className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-pointer group">
+                      <span className="p-2 bg-slate-900 rounded-full group-hover:bg-orange-900 transition-colors"><Phone className="w-4 h-4 text-orange-500"/></span> 
+                      +62 812-xxxx-xxxx
+                    </Link>
+                  </li>
+                  
+                  <li>
+                    <Link href="mailto:hello@jerukmanis.web.id" className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-pointer group">
+                      <span className="p-2 bg-slate-900 rounded-full group-hover:bg-orange-900 transition-colors"><Mail className="w-4 h-4 text-orange-500"/></span> 
+                      hello@jerukmanis.web.id
+                    </Link>
+                  </li>
+                  
+                  <li>
+                    <Link href="https://instagram.com/jerukmanis.creative" target="_blank" className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-pointer group">
+                      <span className="p-2 bg-slate-900 rounded-full group-hover:bg-orange-900 transition-colors"><Instagram className="w-4 h-4 text-orange-500"/></span> 
+                      @jerukmanis.creative
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="md:text-right flex flex-col justify-end">
+                <p className="text-slate-500 text-xs">
+                  © {new Date().getFullYear()} Jerukmanis Creative.<br/>All rights reserved.
+                </p>
+              </div>
+            </div>
+        </footer>
     </div>
   );
 }
