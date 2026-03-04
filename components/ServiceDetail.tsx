@@ -132,7 +132,7 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
 
             <div className="flex items-center gap-4">
               <Link 
-                href="https://wa.me/6281234567890" 
+                href="https://wa.me/6281328945828" 
                 className="hidden md:inline-flex px-6 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-orange-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
               >
                 Hubungi Kami
@@ -263,7 +263,7 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
                             </ul>
 
                             <Link 
-                                href={`https://wa.me/6281234567890?text=Halo%20Jerukmanis,%20saya%20mau%20ambil%20paket%20${pkg.name}%20untuk%20layanan%20${data.title}`}
+                                href={`https://wa.me/6281328945828?text=Halo%20Jerukmanis,%20saya%20mau%20ambil%20paket%20${pkg.name}%20untuk%20layanan%20${data.title}`}
                                 target="_blank"
                                 className="flex items-center justify-center w-full py-4 rounded-xl font-bold transition-all bg-white border border-slate-200 text-slate-900 hover:border-orange-500 hover:text-orange-600 hover:shadow-md"
                             >
@@ -318,7 +318,7 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
                      Jika paket di atas belum sesuai, kami siap membuatkan penawaran custom. sesuai budget dan keinginan Anda.
                    </p>
                    <Link 
-                    href="https://wa.me/6281234567890"
+                    href="https://wa.me/6281328945828"
                     className="inline-flex items-center gap-3 px-8 py-4 bg-orange-600 text-white rounded-full font-bold text-lg hover:bg-orange-500 hover:scale-105 transition-all shadow-lg shadow-orange-500/25 relative z-10"
                    >
                       <Phone className="w-5 h-5" />
@@ -342,7 +342,7 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
                 <h4 className="font-bold text-lg mb-6 text-orange-100">Hubungi Kami</h4>
                 <ul className="space-y-4 text-slate-300 text-sm">
                   <li>
-                    <Link href="https://wa.me/6281234567890" target="_blank" className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-pointer group">
+                    <Link href="https://wa.me/6281328945828" target="_blank" className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-pointer group">
                       <span className="p-2 bg-slate-900 rounded-full group-hover:bg-orange-900 transition-colors"><Phone className="w-4 h-4 text-orange-500"/></span> 
                       +62 812-xxxx-xxxx
                     </Link>

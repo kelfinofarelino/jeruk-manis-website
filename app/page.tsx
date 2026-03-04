@@ -145,7 +145,7 @@ const Navbar = () => {
         {/* CTA Button & Mobile Toggle */}
         <div className="flex items-center gap-4">
           <Link 
-            href="https://wa.me/6281234567890" 
+            href="https://wa.me/6281328945828" 
             className="hidden md:inline-flex px-6 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-full hover:bg-jeruk-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
           >
             Hubungi Kami
@@ -193,9 +193,9 @@ const Footer = () => (
         <h4 className="font-bold text-lg mb-6 text-jeruk-100">Hubungi Kami</h4>
         <ul className="space-y-4 text-slate-300 text-sm">
           <li>
-            <Link href="https://wa.me/6281234567890" target="_blank" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
+            <Link href="https://wa.me/6281328945828" target="_blank" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Phone className="w-4 h-4 text-jeruk-500"/></span> 
-              +62 812-xxxx-xxxx
+              +62 81-328-945-828
             </Link>
           </li>
           
@@ -274,7 +274,7 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="https://wa.me/6281234567890" className="flex items-center justify-center gap-2 px-8 py-4 bg-jeruk-600 text-white rounded-full font-bold text-lg hover:bg-jeruk-700 hover:scale-105 transition-all shadow-xl shadow-jeruk-500/30">
+              <Link href="https://wa.me/6281328945828" className="flex items-center justify-center gap-2 px-8 py-4 bg-jeruk-600 text-white rounded-full font-bold text-lg hover:bg-jeruk-700 hover:scale-105 transition-all shadow-xl shadow-jeruk-500/30">
                 Konsultasi Gratis
                 <ArrowRight className="w-5 h-5" />
               </Link>
@@ -579,7 +579,7 @@ export default function Home() {
                  Yuk, diskusikan idemu ke kita sekarang!
                </p>
                <Link 
-                href="https://wa.me/6281234567890"
+                href="https://wa.me/6281328945828"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-jeruk-600 text-white rounded-full font-bold text-lg hover:bg-jeruk-500 hover:scale-105 transition-all shadow-lg shadow-jeruk-500/25 relative z-10"
                >
                   <Phone className="w-5 h-5" />
