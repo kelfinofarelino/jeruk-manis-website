@@ -8,8 +8,8 @@ import {
   ArrowRight, Play, Camera, Monitor, 
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
   Palette, PartyPopper, Code2, Users, Trophy, Target, 
-  Star, Quote, Zap, Layers, Image as ImageIcon, Film, Heart, Smartphone,
-  ChevronDown
+  Star, Quote, Zap, Layers, ImageIcon, Film, Heart, Smartphone,
+  ChevronDown, QrCode
 } from "lucide-react";
 
 const testimonialsData = [
@@ -181,7 +181,8 @@ const Navbar = () => {
 // --- KOMPONEN FOOTER ---
 const Footer = () => (
   <footer className="bg-slate-950 text-white py-16 border-t-4 border-jeruk-500">
-    <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+    <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+      {/* Branding */}
       <div className="space-y-4">
         <h3 className="text-3xl font-bold">jeruk<span className="text-jeruk-500 font-serif italic">manis</span>.</h3>
         <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
@@ -189,6 +190,8 @@ const Footer = () => (
           Spesialis Event Organizer, Dokumentasi Visual, dan Pengembangan Web untuk Bisnis & Momen Personal Anda.
         </p>
       </div>
+
+      {/* Hubungi Kami */}
       <div>
         <h4 className="font-bold text-lg mb-6 text-jeruk-100">Hubungi Kami</h4>
         <ul className="space-y-4 text-slate-300 text-sm">
@@ -198,14 +201,12 @@ const Footer = () => (
               +62 81-328-945-828
             </Link>
           </li>
-          
           <li>
             <Link href="mailto:hello@jerukmanis.web.id" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Mail className="w-4 h-4 text-jeruk-500"/></span> 
               hello@jerukmanis.web.id
             </Link>
           </li>
-          
           <li>
             <Link href="https://instagram.com/jerukmanis.creative" target="_blank" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
               <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors"><Instagram className="w-4 h-4 text-jeruk-500"/></span> 
@@ -214,6 +215,23 @@ const Footer = () => (
           </li>
         </ul>
       </div>
+
+      {/* Menu Tools */}
+      <div>
+        <h4 className="font-bold text-lg mb-6 text-jeruk-100">Tools</h4>
+        <ul className="space-y-4 text-slate-300 text-sm">
+          <li>
+            <Link href="/tools/qr-generator" className="flex items-center gap-3 hover:text-jeruk-400 transition-colors cursor-pointer group">
+              <span className="p-2 bg-slate-900 rounded-full group-hover:bg-jeruk-900 transition-colors">
+                <QrCode className="w-4 h-4 text-jeruk-500"/>
+              </span> 
+              QR Code Generator
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* Copyright */}
       <div className="md:text-right flex flex-col justify-end">
         <p className="text-slate-500 text-xs">
           © {new Date().getFullYear()} Jerukmanis Creative.<br/>All rights reserved.
