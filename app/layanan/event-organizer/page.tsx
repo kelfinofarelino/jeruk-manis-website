@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ServiceDetail from "@/components/ServiceDetail";
 
 const data = {
-  title: "Sweet 17 Specialist",
+  title: "Sweet 17  ",
   tagline: "Rayakan Sweet Seventeen Paling Hype & Aesthetic!",
   description: "Spesialis Event Organizer yang fokus mewujudkan pesta Sweet Seventeen impianmu. Kami menangani segala tema kekinian (Y2K, Fairy, Coquette, Euphoria) dengan eksekusi detail, mulai dari dekorasi instagramable, MC seru, hingga rundown yang anti-garing.",
   image: "https://images.unsplash.com/photo-1530103862676-de3c9da59af7?q=80&w=800",
