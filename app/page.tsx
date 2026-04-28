@@ -9,7 +9,7 @@ import {
   CheckCircle2, Instagram, Mail, Phone, Menu, X,
   Palette, PartyPopper, Code2, Users, Trophy, Target, 
   Star, Quote, Zap, Layers, ImageIcon, Film, Heart, Smartphone,
-  ChevronDown, QrCode
+  ChevronDown, QrCode, Youtube, Video, CarFront, Scissors, Briefcase
 } from "lucide-react";
 
 const testimonialsData = [
@@ -142,6 +142,8 @@ const Navbar = () => {
           })}
         </div>
 
+        
+        
         {/* CTA Button & Mobile Toggle */}
         <div className="flex items-center gap-4">
           <Link 
@@ -284,16 +286,16 @@ export default function Home() {
           >
             <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
               Solusi <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Kreatif</span>,<br />
-              & <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Event</span> <span className="font-serif italic font-light text-slate-800 relative z-10 before:absolute before:bottom-2 before:left-0 before:w-full before:h-3 before:bg-jeruk-200/50 before:-z-10">Manis.</span>
+              & <span className="text-transparent bg-clip-text bg-gradient-to-r from-jeruk-500 to-yellow-500">Momen</span> <span className="font-serif italic font-light text-slate-800 relative z-10 before:absolute before:bottom-2 before:left-0 before:w-full before:h-3 before:bg-jeruk-200/50 before:-z-10">Manis.</span>
             </h1>
             
             <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
-              Partner kreatif untuk <strong>skala Bisnis</strong> maupun <strong>Sweet 17 Party</strong>. Mulai dari manajemen Event profesional, dokumentasi visual yang estetik, hingga pembuatan website di Yogyakarta.
+              One-stop creative agency yang mengintegrasikan <strong>Digital Tech, Visual Stories, dan Talent Management</strong> dalam satu ekosistem profesional untuk pertumbuhan brand Anda.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="https://wa.me/6281328945828" className="flex items-center justify-center gap-2 px-8 py-4 bg-jeruk-600 text-white rounded-full font-bold text-lg hover:bg-jeruk-700 hover:scale-105 transition-all shadow-xl shadow-jeruk-500/30">
-                Konsultasi Gratis
+                Mulai Projek
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a 
@@ -305,7 +307,7 @@ export default function Home() {
                 className="flex items-center justify-center gap-3 px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-lg hover:border-jeruk-300 hover:bg-jeruk-50 transition-all cursor-pointer"
               >
                 <Play className="w-5 h-5 fill-slate-700" />
-                Lihat Karya
+                Eksplorasi Karya  
               </a>
             </div>
           </motion.div>
@@ -324,10 +326,10 @@ export default function Home() {
                       <h3 className="font-bold text-xl">Visual</h3>
                       <p className="text-slate-400 text-sm">Dokumentasi & Event</p>
                    </div>
-                   <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1000" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Party" />
+                   <img src="images/hero2.jpg" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Corporate Gathering" />
                 </div>
                 <div className="space-y-5">
-                   <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=600" className="rounded-[2rem] h-52 w-full object-cover shadow-lg" alt="Event" />
+                   <img src="images/hero1.jpg" className="rounded-[2rem] h-52 w-full object-cover object-[50%_30%] shadow-lg" alt="Foto Wisuda" />
                    <div className="bg-jeruk-500 p-6 rounded-[2rem] text-white shadow-xl hover:-translate-y-2 transition-transform duration-500">
                       <PartyPopper className="w-10 h-10 text-white mb-4" />
                       <h3 className="font-bold text-xl">Event</h3>
@@ -355,11 +357,11 @@ export default function Home() {
               <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-[2rem] shadow-xl border border-jeruk-100 hidden md:block">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-jeruk-500 rounded-full flex items-center justify-center text-white">
-                    <Trophy className="w-6 h-6" />
+                    <Briefcase className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-3xl font-bold text-slate-900">3+</p>
-                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Tahun Pengalaman</p>
+                    <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Established</p>
+                    <p className="text-3xl font-bold text-slate-900">2025</p>
                   </div>
                 </div>
               </div>
@@ -368,22 +370,18 @@ export default function Home() {
             {/* Teks Cerita */}
             <div>
               <span className="text-jeruk-600 font-bold tracking-wider text-sm uppercase mb-2 block">Tentang Kami</span>
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                Meracik Pengalaman <br/>
-                <span className="font-serif italic text-jeruk-600">Yang Berkesan.</span>
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2 leading-tight">
+                We <span className="font-serif italic text-jeruk-600">Think</span>, We <span className="font-serif italic text-jeruk-600">Create</span>, We <span className="font-serif italic text-jeruk-600">Deliver</span>
               </h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-6">
-                Kami percaya momen terbaik tidak terjadi begitu saja, tapi diciptakan. Jerukmanis hadir sebagai partner fleksibel: andal merancang <strong>Event Perusahaan</strong> dan <strong>Sweet 17 Party</strong>, serta menyediakan solusi digital dan visual berkualitas tinggi.
-              </p>
-              <p className="text-slate-600 leading-relaxed mb-8">
-                Kami adalah kolektif Event Planner, Fotografer, dan Developer di Yogyakarta. Apapun tujuannya—merayakan ulang tahun ke-17 atau launching produk perusahaan—kami punya resep yang pas.
+              <p className="text-slate-600 text-lg leading-relaxed mb-6 text-justify">
+                Berbasis di Yogyakarta, <strong>Jeruk Manis Creative</strong> bermula dari semangat untuk memberikan kesegaran di industri kreatif. Seperti buah jeruk yang memberikan energi, kami hadir untuk <strong>mengalirkan ide-ide segar, strategi digital yang cerdas, dan bakat-bakat potensial bagi brand Anda.</strong> Dari solusi digital yang efisien hingga manajemen talent yang berdampak, Jeruk Manis adalah mitra tumbuh bersama untuk kesuksesan dan 'hasil manis' brand Anda.
               </p>
               <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
                 <div className="flex items-start gap-3">
                    <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Target className="w-5 h-5" /></div>
                    <div>
-                      <h4 className="font-bold text-2xl text-slate-900">50+</h4>
-                      <p className="text-sm text-slate-500">Event & Projek</p>
+                      <h4 className="font-bold text-2xl text-slate-900">30+</h4>
+                      <p className="text-sm text-slate-500">Project Selesai</p>
                    </div>
                 </div>
                 <div className="flex items-start gap-3">
