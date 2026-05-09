@@ -47,12 +47,12 @@ const testimonialsData = [
 
 // --- LIST LAYANAN DROPDOWN ---
 const servicesList = [
-  { title: "Sweet 17 Specialist", slug: "event-organizer" },
-  { title: "Visual Documentation", slug: "visual-documentation" },
-  { title: "Creative Branding", slug: "creative-branding" },
-  { title: "Undangan Digital Website", slug: "undangan-digital" },
-  { title: "Software & Web", slug: "software-web" },
-  { title: "Pro Live Streaming", slug: "professional-live-streaming" },
+  { title: "Digital Architecture", slug: "software-web" },
+  { title: "Visual Production", slug: "visual-documentation" },
+  { title: "Event Activation", slug: "event-organizer" },
+  { title: "Professional Streaming", slug: "professional-live-streaming" },
+  { title: "Identity Branding", slug: "creative-branding" },
+  { title: "Talent Management", slug: "undangan-digital" },
 ];
 
 // --- KOMPONEN NAVBAR ---
@@ -350,7 +350,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute inset-0 bg-jeruk-200 rounded-[2.5rem] rotate-3 transform translate-x-2 translate-y-2 -z-10"></div>
               <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" 
+                src="/images/hero2.jpg" 
                 alt="Tim Jerukmanis" 
                 className="rounded-[2.5rem] w-full object-cover shadow-xl grayscale hover:grayscale-0 transition-all duration-700"
               />
@@ -376,22 +376,6 @@ export default function Home() {
               <p className="text-slate-600 text-lg leading-relaxed mb-6 text-justify">
                 Berbasis di Yogyakarta, <strong>Jeruk Manis Creative</strong> bermula dari semangat untuk memberikan kesegaran di industri kreatif. Seperti buah jeruk yang memberikan energi, kami hadir untuk <strong>mengalirkan ide-ide segar, strategi digital yang cerdas, dan bakat-bakat potensial bagi brand Anda.</strong> Dari solusi digital yang efisien hingga manajemen talent yang berdampak, Jeruk Manis adalah mitra tumbuh bersama untuk kesuksesan dan 'hasil manis' brand Anda.
               </p>
-              <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
-                <div className="flex items-start gap-3">
-                   <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Target className="w-5 h-5" /></div>
-                   <div>
-                      <h4 className="font-bold text-2xl text-slate-900">30+</h4>
-                      <p className="text-sm text-slate-500">Project Selesai</p>
-                   </div>
-                </div>
-                <div className="flex items-start gap-3">
-                   <div className="mt-1 bg-jeruk-50 p-2 rounded-lg text-jeruk-600"><Heart className="w-5 h-5" /></div>
-                   <div>
-                      <h4 className="font-bold text-2xl text-slate-900">20+</h4>
-                      <p className="text-sm text-slate-500">Klien Senang</p>
-                   </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -407,13 +391,13 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-8">
              
-             {/* Card 1: Event Organizer (SWEET 17 FOCUS) */}
+             {/* Card 1x*/}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
-                  icon={<PartyPopper className="w-8 h-8"/>}
-                  title="Sweet 17 Specialist"
-                  slug="event-organizer"
-                  items={["Intimate Birthday Dinner", "Grand Sweet 17 Party", "Thematic Decoration (Y2K/Fairy)", "Guest Star & DJ Management"]}
+                  icon={<Code2 className="w-8 h-8"/>}
+                  title="Digital Architecture"
+                  slug="software-web"
+                  items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio", "Sistem Kasir", "Undangan Digital"]}
                 />
              </div>
 
@@ -421,43 +405,33 @@ export default function Home() {
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Camera className="w-8 h-8"/>}
-                  title="Visual Documentation"
+                  title="Visual Production"
                   slug="visual-documentation"
                   items={["Event Documentation", "Company Profile Video", "Product Commercial & Catalogue", "Social Media Content Creation"]}
                 />
              </div>
-             
+
              {/* Card 3: Creative Branding */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Palette className="w-8 h-8"/>}
-                  title="Creative Branding"
+                  title="Identity Branding"
                   slug="creative-branding"
                   items={["Brand Identity (Logo)", "Social Media Design", "Content Creation", "Visual Strategy"]}
                 />
              </div>
 
-             {/* Card 4: Undangan Digital Website (NO WEDDING) */}
+             {/* Card 4: Event Organizer (SWEET 17 FOCUS) */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
-                  icon={<Smartphone className="w-8 h-8"/>}
-                  title="Undangan Digital Website"
-                  slug="undangan-digital"
-                  items={["Website Invitation (Birthday)", "Video Invitation", "Digital RSVP System"]}
+                  icon={<PartyPopper className="w-8 h-8"/>}
+                  title="Event Activation"
+                  slug="event-organizer"
+                  items={["Event Management", "Corporate Gathering", "Sweet 17", "Guest Star Management"]}
                 />
              </div>
 
-             {/* Card 5: Software Web */}
-             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
-                <ServiceCard 
-                  icon={<Code2 className="w-8 h-8"/>}
-                  title="Software & Web"
-                  slug="software-web"
-                  items={["Website UMKM/Bisnis", "Landing Page Penjualan", "Website Portfolio", "Sistem Kasir"]}
-                />
-             </div>
-
-             {/* Card 6: Professional Live Streaming */}
+             {/* Card 5: Professional Live Streaming */}
             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Monitor className="w-8 h-8"/>} 
@@ -466,6 +440,16 @@ export default function Home() {
                   items={["Multi-Camera Broadcasting", "Hybrid Event (Zoom/Meet)", "YouTube & IG Live", "Clear Audio Direct"]}
                 />
             </div>
+
+             {/* Card 4: Undangan Digital Website (NO WEDDING) */}
+             <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
+                <ServiceCard 
+                  icon={<Star className="w-8 h-8"/>}
+                  title="Talent Management"
+                  slug="undangan-digital"
+                  items={["KOL & Influencer Booking", "Personal Branding Strategy", "Content Production"]}
+                />
+             </div>
 
           </div>
         </div>

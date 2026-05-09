@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import ServiceDetail from "@/components/ServiceDetail";
 
 const data = {
-  title: "Visual Documentation",
+  title: "Visual Production",
   tagline: "Abadikan Momen Spesial dengan Tone Estetik",
   description: "Layanan dokumentasi foto dan video profesional dengan sentuhan artistik. Kami tidak hanya mengambil gambar, tapi bercerita melalui lensa. Cocok untuk Wedding, Prewedding, Wisuda, hingga Event Perusahaan.",
-  image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800",
+  image: "/images/hero1.jpg",
   benefits: [
       { title: "Tone Estetik", desc: "Color grading signature Jerukmanis yang warm, moody, dan timeless." },
       { title: "Gear Pro", desc: "Sony Alpha Series 4K & Drone DJI Terbaru." },
@@ -14,8 +14,11 @@ const data = {
   ],
   process: ["Briefing Konsep", "Shooting Day", "Editing & Grading", "Final Delivery"],
   pricing: [
-      { name: "Photo Session", price: "750rb", features: ["1 Fotografer", "4 Jam Kerja", "50 Edited Photos", "All Files (Google Drive)"] },
+      { name: "Photo Session", price: "800rb", features: ["1 Fotografer", "2 Jam Photoshoot", "50 Edited Photos", "All Raw Files (Google Drive)"] },
+      { name: "Social Content", price: "1.2jt", features: ["3 Video TikTok/Reels Review", "Talent", "Editing", "Content Brief Strategy"] },
       { name: "Cinema Package", price: "1.8jt", features: ["1 Fotografer + 1 Videografer", "6 Jam Kerja", "Teaser 1 Menit (Reels)", "Cinematic Video 3-5 Menit"], recommended: true },
+      { name: "Commercial Ads", price: "2.5jt", features: ["Production Strategy & Script", "Color Grading Premium", "Commercial Usage Rights", "High-Quality Audio Mix"], recommended: true },
+      { name: "Event Highlight", price: "3jt", features: ["2 Fotografer + 1 Videografer", "Full Documentation Archive", "Highlight Video (2-3 Menit)", "Fast Upload Asset"], recommended: true },
       { name: "Full Wedding", price: "3.5jt", features: ["2 Fotografer + 1 Videografer", "Full Day Coverage", "Cetak Album Magazine", "Drone Footage"] }
   ],
   addons: [

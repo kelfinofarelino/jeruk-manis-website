@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jerukmanis | Creative Agency & Event Organizer Jogja",
-  description: "Creative Agency & Event Organizer Jogja",
+  title: "Jerukmanis | Creative Agency Yogyakarta",
+  description: "Creative Agency based in Yogyakarta",
   icons: {
     icon: '/brand-icon.png',
     shortcut: '/brand-icon.png',

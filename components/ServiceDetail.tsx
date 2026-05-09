@@ -23,12 +23,12 @@ type ServiceType = {
 
 // --- DATA DROPDOWN LAYANAN ---
 const servicesList = [
-  { title: "Sweet 17 Specialist", slug: "sweet-17-specialist" },
-  { title: "Visual Documentation", slug: "visual-documentation" },
-  { title: "Creative Branding", slug: "creative-branding" },
-  { title: "Undangan Digital", slug: "undangan-digital" },
-  { title: "Software & Web", slug: "software-web" },
-  { title: "Pro Live Streaming", slug: "professional-live-streaming" },
+  { title: "Digital Architecture", slug: "software-web" },
+  { title: "Visual Production", slug: "visual-documentation" },
+  { title: "Event Activation", slug: "event-organizer" },
+  { title: "Professional Streaming", slug: "professional-live-streaming" },
+  { title: "Identity Branding", slug: "creative-branding" },
+  { title: "Talent Management", slug: "undangan-digital" },
 ];
 
 export default function ServiceDetail({ data }: { data: ServiceType }) {
@@ -344,7 +344,7 @@ export default function ServiceDetail({ data }: { data: ServiceType }) {
                   <li>
                     <Link href="https://wa.me/6281328945828" target="_blank" className="flex items-center gap-3 hover:text-orange-400 transition-colors cursor-pointer group">
                       <span className="p-2 bg-slate-900 rounded-full group-hover:bg-orange-900 transition-colors"><Phone className="w-4 h-4 text-orange-500"/></span> 
-                      +62 812-xxxx-xxxx
+                      +62 8813-2894-5828
                     </Link>
                   </li>
                   
