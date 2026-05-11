@@ -12,6 +12,7 @@ import {
   ChevronDown, QrCode, Youtube, Video, CarFront, Scissors, Briefcase
 } from "lucide-react";
 
+// Testimoni Data
 const testimonialsData = [
   {
     name: "Clarissa Putri",
@@ -45,7 +46,7 @@ const testimonialsData = [
   }
 ];
 
-// --- LIST LAYANAN DROPDOWN ---
+// DROPDOWN LAYANAN NAVBAR
 const servicesList = [
   { title: "Digital Architecture", slug: "software-web" },
   { title: "Visual Production", slug: "visual-documentation" },
@@ -55,7 +56,7 @@ const servicesList = [
   { title: "Talent Management", slug: "undangan-digital" },
 ];
 
-// --- KOMPONEN NAVBAR ---
+// NAVBAR COMPONENT
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -180,7 +181,7 @@ const Navbar = () => {
   );
 };
 
-// --- KOMPONEN FOOTER ---
+// FOOTER COMPONENT
 const Footer = () => (
   <footer className="bg-slate-950 text-white py-16 border-t-4 border-jeruk-500">
     <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
@@ -391,7 +392,7 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-8">
              
-             {/* Card 1x*/}
+             {/* Card 1: Digital Architecture */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Code2 className="w-8 h-8"/>}
@@ -401,7 +402,7 @@ export default function Home() {
                 />
              </div>
 
-             {/* Card 2: Visual Documentation (MERGED) */}
+             {/* Card 2: Visual Production */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Camera className="w-8 h-8"/>}
@@ -411,7 +412,7 @@ export default function Home() {
                 />
              </div>
 
-             {/* Card 3: Creative Branding */}
+             {/* Card 3: Identity Branding */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Palette className="w-8 h-8"/>}
@@ -421,7 +422,7 @@ export default function Home() {
                 />
              </div>
 
-             {/* Card 4: Event Organizer (SWEET 17 FOCUS) */}
+             {/* Card 4: Event Activation */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<PartyPopper className="w-8 h-8"/>}
@@ -441,7 +442,7 @@ export default function Home() {
                 />
             </div>
 
-             {/* Card 4: Undangan Digital Website (NO WEDDING) */}
+             {/* Card 6: Talent Management */}
              <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.5rem)]">
                 <ServiceCard 
                   icon={<Star className="w-8 h-8"/>}
@@ -455,7 +456,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. PORTOFOLIO SECTION */}
+      {/* 4. PORTFOLIO SECTION */}
       <section id="portofolio" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
@@ -478,7 +479,7 @@ export default function Home() {
                   </div>
               </div>
               
-              {/* Portfolio Item 2 (UPDATED to Sweet 17) */}
+              {/* Portfolio Item 2 */}
               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
                   <img src="https://plus.unsplash.com/premium_photo-1742444926373-db6c4e4a18fe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bmVvbiUyMG5pZ2h0JTIwcGFydHl8ZW58MHx8MHx8fDA%3D" alt="Party Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
@@ -536,7 +537,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. TESTIMONI PENIKMAT (MARQUEE) */}
+      {/* 6. TESTIMONI SECTION */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">Testimoni <span className="font-serif italic text-jeruk-600">Penikmat</span></h2>
