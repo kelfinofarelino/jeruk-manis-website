@@ -245,6 +245,7 @@ const Footer = () => (
 );
 
 export default function Home() {
+  const [pinnedPortfolios, setPinnedPortfolios] = useState<any[]>([]);
   
   // --- LENIS SMOOTH SCROLL ---
   useEffect(() => {
@@ -256,6 +257,20 @@ export default function Home() {
     requestAnimationFrame(raf);
     return () => lenis.destroy();
   }, []);
+
+  // --- AMBIL DATA PORTOFOLIO YANG DI-PIN ---
+  useEffect(() => {
+  fetch("/api/portfolio")
+    .then((res) => res.json())
+    .then((data) => {
+      if (Array.isArray(data)) {
+        // Ambil maksimal 3 portofolio yang statusnya isPinned === true
+        const pinned = data.filter((item: any) => item.isPinned).slice(0, 3);
+        setPinnedPortfolios(pinned);
+      }
+    })
+    .catch((err) => console.error("Gagal memuat portofolio:", err));
+}, []);
 
   return (
     <main className="min-h-screen bg-white selection:bg-jeruk-200 selection:text-jeruk-900 font-sans">
@@ -456,7 +471,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. PORTFOLIO SECTION */}
+      {/* 4. PORTFOLIO SECTION (DINAMIS) */}
       <section id="portofolio" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
@@ -464,38 +479,36 @@ export default function Home() {
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2">Hasil <span className="font-serif italic text-jeruk-600">Panen</span></h2>
                 <p className="text-slate-500">Jejak karya manis dari berbagai event dan projek kami.</p>
               </div>
-              <button className="hidden md:flex items-center gap-2 text-jeruk-600 font-semibold hover:gap-4 transition-all group">
+              
+              {/* TOMBOL LIHAT SEMUA MENGARAH KE HALAMAN BARU */}
+              <Link href="/portofolio" className="hidden md:flex items-center gap-2 text-jeruk-600 font-semibold hover:gap-4 transition-all group">
                 Lihat Semua <ArrowRight className="w-4 h-4 group-hover:text-jeruk-500"/>
-              </button>
+              </Link>
            </div>
            
-           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Portfolio Item 1 */}
-              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" alt="Event Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {pinnedPortfolios.length > 0 ? (
+              pinnedPortfolios.map((item) => (
+                <div key={item.id} className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 bg-slate-100">
+                  <img src={item.mediaUrls?.[0]} alt={item.title} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Event Organizer</span>
-                    <h3 className="text-white text-xl font-bold">Annual Corporate Gathering</h3>
+                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">{item.type}</span>
+                    <h3 className="text-white text-xl font-bold">{item.title}</h3>
                   </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12 border-2 border-dashed border-slate-200 rounded-3xl">
+                <p className="text-slate-500">Belum ada portofolio yang disematkan (Pin) dari admin.</p>
               </div>
-              
-              {/* Portfolio Item 2 */}
-              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <img src="https://plus.unsplash.com/premium_photo-1742444926373-db6c4e4a18fe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bmVvbiUyMG5pZ2h0JTIwcGFydHl8ZW58MHx8MHx8fDA%3D" alt="Party Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Sweet 17 Specialist</span>
-                    <h3 className="text-white text-xl font-bold">Euphoria Neon Night Party</h3>
-                  </div>
-              </div>
-              
-               {/* Portfolio Item 3 */}
-               <div className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Web Project" className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"/>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                    <span className="text-jeruk-400 text-xs font-bold uppercase tracking-wider mb-2">Web Development</span>
-                    <h3 className="text-white text-xl font-bold">Company Profile & Katalog</h3>
-                  </div>
-              </div>
+            )}
+          </div>
+           
+           {/* Tombol Lihat Semua versi Mobile */}
+           <div className="mt-8 text-center md:hidden">
+              <Link href="/portofolio" className="inline-flex items-center gap-2 text-jeruk-600 font-semibold border border-jeruk-200 px-6 py-3 rounded-full hover:bg-jeruk-50 transition-all">
+                Lihat Semua Karya <ArrowRight className="w-4 h-4"/>
+              </Link>
            </div>
         </div>
       </section>
